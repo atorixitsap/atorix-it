@@ -218,9 +218,9 @@ export default function GetDemoPage() {
                       value={formData.name}
                       onChange={handleChange}
                       aria-invalid={errors.name ? "true" : "false"}
-                      className={`w-full px-4 py-2 rounded-md border ${
-                        errors.name ? 'border-red-500 dark:border-red-400' : 'border-input'
-                      } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                      className={"w-full px-4 py-2 rounded-md border " +
+                        (errors.name ? 'border-red-500 dark:border-red-400' : 'border-input') +
+                        " bg-background focus:border-primary focus:ring-1 focus:ring-primary"}
                       placeholder="Enter your full name"
                     />
                     {errors.name && (
@@ -241,9 +241,9 @@ export default function GetDemoPage() {
                       value={formData.email}
                       onChange={handleChange}
                       aria-invalid={errors.email ? "true" : "false"}
-                      className={`w-full px-4 py-2 rounded-md border ${
-                        errors.email ? 'border-red-500 dark:border-red-400' : 'border-input'
-                      } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                      className={"w-full px-4 py-2 rounded-md border " +
+                        (errors.email ? 'border-red-500 dark:border-red-400' : 'border-input') +
+                        " bg-background focus:border-primary focus:ring-1 focus:ring-primary"}
                       placeholder="Enter your email address"
                     />
                     {errors.email && (
@@ -268,9 +268,9 @@ export default function GetDemoPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       aria-invalid={errors.phone ? "true" : "false"}
-                      className={`w-full px-4 py-2 rounded-md border ${
-                        errors.phone ? 'border-red-500 dark:border-red-400' : 'border-input'
-                      } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                      className={"w-full px-4 py-2 rounded-md border " +
+                        (errors.phone ? 'border-red-500 dark:border-red-400' : 'border-input') +
+                        " bg-background focus:border-primary focus:ring-1 focus:ring-primary"}
                       placeholder="Enter your phone number"
                     />
                     {errors.phone && (
@@ -291,9 +291,9 @@ export default function GetDemoPage() {
                       value={formData.company}
                       onChange={handleChange}
                       aria-invalid={errors.company ? "true" : "false"}
-                      className={`w-full px-4 py-2 rounded-md border ${
-                        errors.company ? 'border-red-500 dark:border-red-400' : 'border-input'
-                      } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                      className={"w-full px-4 py-2 rounded-md border " +
+                        (errors.company ? 'border-red-500 dark:border-red-400' : 'border-input') +
+                        " bg-background focus:border-primary focus:ring-1 focus:ring-primary"}
                       placeholder="Enter your company name"
                     />
                     {errors.company && (
@@ -316,9 +316,9 @@ export default function GetDemoPage() {
                     value={formData.role}
                     onChange={handleChange}
                     aria-invalid={errors.role ? "true" : "false"}
-                    className={`w-full px-4 py-2 rounded-md border ${
-                      errors.role ? 'border-red-500 dark:border-red-400' : 'border-input'
-                    } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                    className={"w-full px-4 py-2 rounded-md border " +
+                      (errors.role ? 'border-red-500 dark:border-red-400' : 'border-input') +
+                      " bg-background focus:border-primary focus:ring-1 focus:ring-primary"}
                   >
                     <option value="" disabled>Select your role</option>
                     <option value="C-Level Executive">C-Level Executive</option>

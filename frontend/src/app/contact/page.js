@@ -576,11 +576,13 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={handleChange}
                         aria-invalid={errors.name ? "true" : "false"}
-                        className={`w-full px-4 py-2 rounded-md border ${
-                          errors.name
+                        className={
+                          "w-full px-4 py-2 rounded-md border " +
+                          (errors.name
                             ? "border-red-500 dark:border-red-400"
-                            : "border-input"
-                        } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                            : "border-input") +
+                          " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                        }
                         placeholder="Enter your full name"
                       />
                       {errors.name && (
@@ -608,11 +610,13 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         aria-invalid={errors.email ? "true" : "false"}
-                        className={`w-full px-4 py-2 rounded-md border ${
-                          errors.email
+                        className={
+                          "w-full px-4 py-2 rounded-md border " +
+                          (errors.email
                             ? "border-red-500 dark:border-red-400"
-                            : "border-input"
-                        } bg-background focus:border-primary focus:ring-1 focus:ring-primary"}
+                            : "border-input") +
+                          " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                        }
                         placeholder="Enter your email address"
                       />
                       {errors.email && (
@@ -642,11 +646,13 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={handleChange}
                         aria-invalid={errors.phone ? "true" : "false"}
-                        className={`w-full px-4 py-2 rounded-md border ${
-                          errors.phone
+                        className={
+                          "w-full px-4 py-2 rounded-md border " +
+                          (errors.phone
                             ? "border-red-500 dark:border-red-400"
-                            : "border-input"
-                        } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                            : "border-input") +
+                          " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                        }
                         placeholder="Enter your phone number"
                       />
                       {errors.phone && (
@@ -696,11 +702,13 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       aria-invalid={errors.message ? "true" : "false"}
-                      className={`w-full px-4 py-2 rounded-md border ${
-                        errors.message
+                      className={
+                        "w-full px-4 py-2 rounded-md border " +
+                        (errors.message
                           ? "border-red-500 dark:border-red-400"
-                          : "border-input"
-                      } bg-background focus:border-primary focus:ring-1 focus:ring-primary resize-none`}
+                          : "border-input") +
+                        " bg-background focus:border-primary focus:ring-1 focus:ring-primary resize-none"
+                      }
                       placeholder="Tell us about your project or inquiry"
                     ></textarea>
                     {errors.message && (

@@ -324,9 +324,11 @@ export default function CtaSection() {
                     value={formData.firstName}
                     onChange={handleChange}
                     aria-invalid={errors.firstName ? "true" : "false"}
-                    className={`w-full px-4 py-2 rounded-md border ${
-                      errors.firstName ? "border-red-500 dark:border-red-400" : "border-input"
-                    } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                    className={
+                      "w-full px-4 py-2 rounded-md border " +
+                      (errors.firstName ? "border-red-500 dark:border-red-400" : "border-input") +
+                      " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                    }
                     placeholder="Enter your first name"
                   />
                   {errors.firstName && (
@@ -346,9 +348,11 @@ export default function CtaSection() {
                     value={formData.lastName}
                     onChange={handleChange}
                     aria-invalid={errors.lastName ? "true" : "false"}
-                    className={`w-full px-4 py-2 rounded-md border ${
-                      errors.lastName ? "border-red-500 dark:border-red-400" : "border-input"
-                    } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                    className={
+                      "w-full px-4 py-2 rounded-md border " +
+                      (errors.lastName ? "border-red-500 dark:border-red-400" : "border-input") +
+                      " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                    }
                     placeholder="Enter your last name"
                   />
                   {errors.lastName && (
@@ -369,9 +373,11 @@ export default function CtaSection() {
                   value={formData.email}
                   onChange={handleChange}
                   aria-invalid={errors.email ? "true" : "false"}
-                  className={`w-full px-4 py-2 rounded-md border ${
-                    errors.email ? "border-red-500 dark:border-red-400" : "border-input"
-                  } bg-background focus:border-primary focus:ring-1 focus:ring-primary`}
+                  className={
+                    "w-full px-4 py-2 rounded-md border " +
+                    (errors.email ? "border-red-500 dark:border-red-400" : "border-input") +
+                    " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                  }
                   placeholder="Enter your email"
                 />
                 {errors.email && (

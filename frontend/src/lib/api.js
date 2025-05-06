@@ -4,7 +4,7 @@
 
 // Base URL for API requests - will be provided via environment variables
 // Updated to use the deployed backend URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://atorix-backend-fe4y.onrender.com';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://atorix-it.onrender.com';
 
 /**
  * Submit form data to the backend API

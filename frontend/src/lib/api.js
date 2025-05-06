@@ -3,7 +3,8 @@
  */
 
 // Base URL for API requests - will be provided via environment variables
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+// Updated to use the deployed backend URL
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://atorix-backend-fe4y.onrender.com';
 
 /**
  * Submit form data to the backend API
@@ -12,6 +13,9 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
  */
 export async function submitFormData(formData) {
   try {
+    console.log('Submitting form data to:', `${API_BASE_URL}/api/submit`);
+    console.log('Form data:', formData);
+
     const response = await fetch(`${API_BASE_URL}/api/submit`, {
       method: 'POST',
       headers: {
@@ -22,6 +26,7 @@ export async function submitFormData(formData) {
 
     // Parse the JSON response
     const data = await response.json();
+    console.log('API response:', data);
 
     // If the response is not ok, throw an error with the message from the API
     if (!response.ok) {

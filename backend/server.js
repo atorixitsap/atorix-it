@@ -23,6 +23,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const allowedOrigins = [
     'https://atorixit.in', // Main domain
     'https://www.atorixit.in', // Optional www subdomain
+    'https://atorix-testing.vercel.app', // Testing domain
     'http://localhost:3000' // For local development
 ];
 

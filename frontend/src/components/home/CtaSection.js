@@ -9,9 +9,9 @@ import { submitFormData, normalizeFormData } from "@/lib/api";
 export default function CtaSection() {
   const canvasRef = useRef(null);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
+    phone: "",
     company: "",
     message: "",
   });
@@ -114,14 +114,11 @@ export default function CtaSection() {
   const validateForm = () => {
     const newErrors = {};
 
-    // First name validation
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = "First name is required";
-    }
-
-    // Last name validation
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters";
     }
 
     // Email validation
@@ -129,6 +126,13 @@ export default function CtaSection() {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
+    }
+
+    // Phone validation (required field)
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^[+\d\s\-()]{7,20}$/.test(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number";
     }
 
     // Company is optional
@@ -172,26 +176,17 @@ export default function CtaSection() {
     setApiError(null);
 
     try {
-      // Normalize the form data to match the backend API's expected structure
-      const normalizedData = normalizeFormData({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        company: formData.company,
-        message: formData.message,
-      });
-
-      // Submit the normalized data to the API
-      const result = await submitFormData(normalizedData);
+      // Submit data directly to the API (fields are already named correctly)
+      const result = await submitFormData(formData);
 
       if (result.success) {
         setSubmitted(true);
 
         // Reset form data
         setFormData({
-          firstName: "",
-          lastName: "",
+          name: "",
           email: "",
+          phone: "",
           company: "",
           message: "",
         });
@@ -313,56 +308,31 @@ export default function CtaSection() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="firstName" className="text-sm font-medium">
-                    First Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="firstName"
-                    type="text"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    aria-invalid={errors.firstName ? "true" : "false"}
-                    className={
-                      "w-full px-4 py-2 rounded-md border " +
-                      (errors.firstName ? "border-red-500 dark:border-red-400" : "border-input") +
-                      " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
-                    }
-                    placeholder="Enter your first name"
-                  />
-                  {errors.firstName && (
-                    <p className="text-red-500 text-sm flex items-center mt-1">
-                      <AlertCircle className="h-3.5 w-3.5 mr-1" />
-                      {errors.firstName}
-                    </p>
-                  )}
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="lastName" className="text-sm font-medium">
-                    Last Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="lastName"
-                    type="text"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    aria-invalid={errors.lastName ? "true" : "false"}
-                    className={
-                      "w-full px-4 py-2 rounded-md border " +
-                      (errors.lastName ? "border-red-500 dark:border-red-400" : "border-input") +
-                      " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
-                    }
-                    placeholder="Enter your last name"
-                  />
-                  {errors.lastName && (
-                    <p className="text-red-500 text-sm flex items-center mt-1">
-                      <AlertCircle className="h-3.5 w-3.5 mr-1" />
-                      {errors.lastName}
-                    </p>
-                  )}
-                </div>
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-sm font-medium">
+                  Your Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={handleChange}
+                  aria-invalid={errors.name ? "true" : "false"}
+                  className={
+                    "w-full px-4 py-2 rounded-md border " +
+                    (errors.name ? "border-red-500 dark:border-red-400" : "border-input") +
+                    " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                  }
+                  placeholder="Enter your full name"
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm flex items-center mt-1">
+                    <AlertCircle className="h-3.5 w-3.5 mr-1" />
+                    {errors.name}
+                  </p>
+                )}
               </div>
+
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium">
                   Email Address <span className="text-red-500">*</span>
@@ -387,6 +357,32 @@ export default function CtaSection() {
                   </p>
                 )}
               </div>
+
+              <div className="space-y-2">
+                <label htmlFor="phone" className="text-sm font-medium">
+                  Phone Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  aria-invalid={errors.phone ? "true" : "false"}
+                  className={
+                    "w-full px-4 py-2 rounded-md border " +
+                    (errors.phone ? "border-red-500 dark:border-red-400" : "border-input") +
+                    " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                  }
+                  placeholder="Enter your phone number"
+                />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm flex items-center mt-1">
+                    <AlertCircle className="h-3.5 w-3.5 mr-1" />
+                    {errors.phone}
+                  </p>
+                )}
+              </div>
+
               <div className="space-y-2">
                 <label htmlFor="company" className="text-sm font-medium">
                   Company
@@ -400,6 +396,7 @@ export default function CtaSection() {
                   placeholder="Enter your company name"
                 />
               </div>
+
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium">
                   Message
@@ -413,6 +410,7 @@ export default function CtaSection() {
                   placeholder="Tell us about your requirements"
                 ></textarea>
               </div>
+
               <Button
                 type="submit"
                 className="w-full"

@@ -3,8 +3,11 @@
  */
 
 // Base URL for API requests - will be provided via environment variables
-// Updated to use the deployed backend URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://atorix-it.onrender.com';
+// Updated to use the deployed backend URL or localhost for development
+// Detect if we're in development mode
+const isDevelopment = process.env.NODE_ENV === 'development';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ||
+                     (isDevelopment ? 'http://localhost:5001' : 'https://atorix-it.onrender.com');
 
 /**
  * Submit form data to the backend API
@@ -13,8 +16,6 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://atorix-it.onren
  */
 export async function submitFormData(formData) {
   try {
-    console.log('Submitting form data to:', `${API_BASE_URL}/api/submit`);
-    console.log('Form data:', formData);
 
     const response = await fetch(`${API_BASE_URL}/api/submit`, {
       method: 'POST',
@@ -26,7 +27,6 @@ export async function submitFormData(formData) {
 
     // Parse the JSON response
     const data = await response.json();
-    console.log('API response:', data);
 
     // If the response is not ok, throw an error with the message from the API
     if (!response.ok) {
@@ -45,54 +45,60 @@ export async function submitFormData(formData) {
 
 /**
  * Normalize form data to match the backend API's expected structure
+ *
+ * Backend Schema:
+ * - name: String (required)
+ * - email: String (required)
+ * - phone: String (required) - Phone number
+ * - company: String (optional)
+ * - role: String (optional)
+ * - interestedIn: Array of String (optional)
+ * - message: String (optional)
+ *
  * @param {Object} formData - Raw form data from components
  * @returns {Object} - Normalized form data
  */
 export function normalizeFormData(formData) {
-  // Start with the basic fields required by the backend
+  // Create the normalized structure to match backend schema
   const normalizedData = {
     name: '',
     email: '',
-    contact: '',
-    countryCode: '', // Optional
-    coursename: '', // Optional
-    location: '', // Optional
+    phone: '',
+    company: '',
+    role: '',
+    interestedIn: [],
+    message: '',
   };
 
-  // Map form fields based on the type of form
-  // Handle first name + last name combination
+  // Process name field
   if (formData.firstName && formData.lastName) {
+    // If we have first name and last name separate, combine them
     normalizedData.name = `${formData.firstName} ${formData.lastName}`.trim();
-  }
-  // Handle single name field
-  else if (formData.name) {
+  } else if (formData.name) {
+    // Otherwise use the name field directly
     normalizedData.name = formData.name.trim();
   }
 
-  // Map email, always keeping the same field name
+  // Email field (same name in both frontend and backend)
   normalizedData.email = formData.email ? formData.email.trim() : '';
 
-  // Map contact (phone)
-  normalizedData.contact = formData.phone || formData.contact || '';
+  // Map phone field (frontend might use 'phone' or legacy 'contact')
+  normalizedData.phone = formData.phone ? formData.phone.trim() :
+                        (formData.contact ? formData.contact.trim() : '');
 
-  // Add company as location if available
-  if (formData.company) {
-    normalizedData.location = formData.company.trim();
+  // Company field (same name in backend)
+  normalizedData.company = formData.company ? formData.company.trim() : '';
+
+  // Role field (same name in backend)
+  normalizedData.role = formData.role ? formData.role.trim() : '';
+
+  // Interested in fields (from checkbox group in demo form)
+  if (formData.interests && Array.isArray(formData.interests)) {
+    normalizedData.interestedIn = formData.interests.map(interest => interest.trim());
   }
 
-  // Add role or interests as coursename if available
-  if (formData.role) {
-    normalizedData.coursename = formData.role;
-  } else if (formData.interests && Array.isArray(formData.interests) && formData.interests.length) {
-    normalizedData.coursename = formData.interests.join(', ');
-  }
-
-  // Add message to coursename if available, appending to existing coursename
-  if (formData.message) {
-    normalizedData.coursename = normalizedData.coursename
-      ? `${normalizedData.coursename} - ${formData.message.substring(0, 100)}`
-      : formData.message.substring(0, 100);
-  }
+  // Message field (same name in backend)
+  normalizedData.message = formData.message ? formData.message.trim() : '';
 
   return normalizedData;
 }

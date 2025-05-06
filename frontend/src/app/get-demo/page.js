@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, Send, AlertCircle } from "lucide-react";
-import { submitFormData, normalizeFormData } from "@/lib/api";
+import { submitFormData } from "@/lib/api";
 
 export default function GetDemoPage() {
   const [formData, setFormData] = useState({
@@ -106,11 +106,15 @@ export default function GetDemoPage() {
     setApiError(null);
 
     try {
-      // Normalize the form data to match the backend API's expected structure
-      const normalizedData = normalizeFormData(formData);
+      // The interests array needs special handling for the backend - rename to interestedIn
+      const formDataWithRenamedInterests = {
+        ...formData,
+        interestedIn: formData.interests // Rename interests array to interestedIn
+      };
+      delete formDataWithRenamedInterests.interests; // Remove the original interests array
 
-      // Submit the normalized data to the API
-      const result = await submitFormData(normalizedData);
+      // Submit the form data directly to the API
+      const result = await submitFormData(formDataWithRenamedInterests);
 
       if (result.success) {
         setSubmitted(true);

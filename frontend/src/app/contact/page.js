@@ -276,6 +276,7 @@ export default function ContactPage() {
     }
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -292,17 +293,8 @@ export default function ContactPage() {
     setApiError(null);
 
     try {
-      // Normalize the form data to match the backend API's expected structure
-      const normalizedData = normalizeFormData({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        company: formData.company,
-        message: formData.message,
-      });
-
-      // Submit the normalized data to the API
-      const result = await submitFormData(normalizedData);
+      // Submit data directly to the API (fields are already named correctly)
+      const result = await submitFormData(formData);
 
       if (result.success) {
         setSubmitted(true);

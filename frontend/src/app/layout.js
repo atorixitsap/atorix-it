@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
+import FloatingContactButtons from "@/components/common/FloatingContactButtons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
           <Footer />
+          <FloatingContactButtons />
         </ThemeProvider>
       </body>
     </html>

@@ -1,11 +1,9 @@
-"use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, Send, AlertCircle } from "lucide-react";
-import { submitFormData } from "@/lib/api";
+import { submitWeb3FormData } from "@/lib/api";
 
 export default function GetDemoPage() {
   const [formData, setFormData] = useState({
@@ -106,15 +104,16 @@ export default function GetDemoPage() {
     setApiError(null);
 
     try {
-      // The interests array needs special handling for the backend - rename to interestedIn
-      const formDataWithRenamedInterests = {
+      // Prepare data for Web3Forms
+      // Convert the interests array to a string for easier email reading
+      const formattedFormData = {
         ...formData,
-        interestedIn: formData.interests // Rename interests array to interestedIn
+        interests: formData.interests.join(", "),
+        subject: "Demo Request from " + formData.name,
       };
-      delete formDataWithRenamedInterests.interests; // Remove the original interests array
 
-      // Submit the form data directly to the API
-      const result = await submitFormData(formDataWithRenamedInterests);
+      // Submit the form data to Web3Forms
+      const result = await submitWeb3FormData(formattedFormData);
 
       if (result.success) {
         setSubmitted(true);
@@ -209,6 +208,14 @@ export default function GetDemoPage() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Hidden honeypot field to prevent spam */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  className="hidden"
+                  style={{ display: 'none' }}
+                />
+
                 {/* Name and Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">

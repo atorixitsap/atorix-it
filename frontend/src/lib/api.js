@@ -9,6 +9,56 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ||
                      (isDevelopment ? 'http://localhost:5001' : 'https://atorix-it.onrender.com');
 
+// Web3Forms API endpoint
+const WEB3FORMS_API_URL = 'https://api.web3forms.com/submit';
+// Your Web3Forms access key - should be stored in env variables for production
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'YOUR_ACCESS_KEY_HERE';
+
+/**
+ * Submit form data to Web3Forms to receive emails
+ * @param {Object} formData - The form data to submit
+ * @returns {Promise} - Response from the Web3Forms API
+ */
+export async function submitWeb3FormData(formData) {
+  try {
+    // Create a new FormData instance
+    const web3FormData = new FormData();
+
+    // Add the access key
+    web3FormData.append('access_key', WEB3FORMS_ACCESS_KEY);
+
+    // Add all form fields
+    Object.entries(formData).forEach(([key, value]) => {
+      web3FormData.append(key, value);
+    });
+
+    // Optionally set subject
+    web3FormData.append('subject', `New Contact Form Submission from ${formData.name || 'Website Visitor'}`);
+
+    // You can add a hidden honeypot field to prevent spam
+    web3FormData.append('botcheck', '');
+
+    const response = await fetch(WEB3FORMS_API_URL, {
+      method: 'POST',
+      body: web3FormData
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      return { success: true, data };
+    } else {
+      throw new Error(data.message || 'Form submission failed');
+    }
+  } catch (error) {
+    console.error('Error submitting form to Web3Forms:', error);
+    return {
+      success: false,
+      error: error.message || 'An unexpected error occurred'
+    };
+  }
+}
+
 /**
  * Submit form data to the backend API
  * @param {Object} formData - The form data to submit

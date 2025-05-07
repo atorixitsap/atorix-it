@@ -44,17 +44,22 @@ export default function LoginPage() {
       return;
     }
 
-    // Attempt login
-    const result = login(formData.username, formData.password);
+    try {
+      // Attempt login - updated for async function
+      const result = await login(formData.username, formData.password);
 
-    if (result.success) {
-      // Redirect to dashboard
-      router.push("/admin/dashboard");
-    } else {
-      setError(result.message);
+      if (result.success) {
+        // Redirect to dashboard
+        router.push("/admin/dashboard");
+      } else {
+        setError(result.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (

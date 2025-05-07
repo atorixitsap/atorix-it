@@ -2,28 +2,42 @@
  * Authentication utilities for dashboard access
  */
 
-// Get dashboard credentials from environment variables
-const DASHBOARD_USERNAME = process.env.NEXT_PUBLIC_DASHBOARD_USERNAME || 'admin@atorix.com';
-const DASHBOARD_PASSWORD = process.env.NEXT_PUBLIC_DASHBOARD_PASSWORD || 'securePassword1234!';
+// API URLs
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
 
 /**
- * Check if credentials are valid
+ * Check if credentials are valid by calling the API
  * @param {string} username - The username/email to check
  * @param {string} password - The password to check
- * @returns {boolean} - Whether the credentials are valid
+ * @returns {Promise<{success: boolean, token?: string, message?: string}>} - Authentication result
  */
-export function validateCredentials(username, password) {
-  return username === DASHBOARD_USERNAME && password === DASHBOARD_PASSWORD;
+export async function validateCredentials(username, password) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Authentication error:', error);
+    return {
+      success: false,
+      message: 'Authentication failed. Please try again.'
+    };
+  }
 }
 
 /**
  * Store authentication token in sessionStorage
- * This is a simple implementation. In a real app, you'd use a proper JWT token
+ * @param {string} token - The authentication token
  */
-export function setAuthToken() {
+export function setAuthToken(token) {
   if (typeof window !== 'undefined') {
-    // Create a simple token (timestamp + username hash)
-    const token = `atorix_dashboard_${Date.now()}_${btoa(DASHBOARD_USERNAME)}`;
     sessionStorage.setItem('atorix_auth_token', token);
     return token;
   }
@@ -55,20 +69,22 @@ export function isAuthenticated() {
  * Login user
  * @param {string} username - The username/email
  * @param {string} password - The password
- * @returns {object} - Result object with success and message
+ * @returns {Promise<{success: boolean, message?: string}>} - Result object with success and message
  */
-export function login(username, password) {
-  if (validateCredentials(username, password)) {
-    const token = setAuthToken();
+export async function login(username, password) {
+  const result = await validateCredentials(username, password);
+
+  if (result.success && result.token) {
+    setAuthToken(result.token);
     return {
       success: true,
-      token
+      token: result.token
     };
   }
 
   return {
     success: false,
-    message: 'Invalid username or password'
+    message: result.message || 'Invalid username or password'
   };
 }
 

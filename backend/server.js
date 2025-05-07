@@ -2,26 +2,20 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const sgMail = require("@sendgrid/mail");
+// Removing SendGrid import
+const bcrypt = require("bcrypt"); // Add bcrypt for password hashing
 require("dotenv").config();
 
 const app = express();
 
 // --- Environment Variable Checks (Good Practice) ---
-if (!process.env.SENDGRID_API_KEY) {
-  console.warn(
-    "WARNING: SENDGRID_API_KEY environment variable not set. Email notifications will fail."
-  );
-}
+// Remove SendGrid checks
 if (!process.env.MONGODB_URI) {
   console.error(
     "ERROR: MONGODB_URI environment variable not set. Cannot connect to database."
   );
   process.exit(1); // Exit if DB connection string is missing
 }
-
-// Set SendGrid API key
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // --- CORS Configuration ---
 const allowedOrigins = [
@@ -94,7 +88,56 @@ const userSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+// Admin schema for storing admin login credentials
+const adminSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
 const User = mongoose.model("User", userSchema);
+const Admin = mongoose.model("Admin", adminSchema);
+
+// Initialize admin user if none exists
+async function initializeAdmin() {
+  try {
+    const adminCount = await Admin.countDocuments();
+    if (adminCount === 0) {
+      const defaultUsername = 'admin@atorix.com';
+      const defaultPassword = 'securePassword1234!';
+
+      // Hash the default password
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(defaultPassword, saltRounds);
+
+      // Create new admin
+      const newAdmin = new Admin({
+        username: defaultUsername,
+        password: hashedPassword
+      });
+
+      await newAdmin.save();
+      console.log('Default admin user created.');
+    }
+  } catch (error) {
+    console.error('Error initializing admin user:', error);
+  }
+}
+
+// Call the initialization function
+initializeAdmin();
 
 // --- API Routes ---
 
@@ -107,6 +150,112 @@ app.get("/api/ping", (req, res) => {
       message: "Server is awake",
       timestamp: new Date().toISOString(),
     });
+});
+
+// === Admin Authentication Route ===
+app.post("/api/admin/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Basic validation
+    if (!username || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Username and password are required"
+      });
+    }
+
+    // Find admin user
+    const admin = await Admin.findOne({ username: username.toLowerCase() });
+
+    // Check if admin exists
+    if (!admin) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid username or password"
+      });
+    }
+
+    // Verify password
+    const passwordMatch = await bcrypt.compare(password, admin.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid username or password"
+      });
+    }
+
+    // Generate a simple token (in a production app, you would use JWT)
+    const token = `atorix_dashboard_${Date.now()}_${Buffer.from(username).toString('base64')}`;
+
+    res.status(200).json({
+      success: true,
+      token,
+      message: "Login successful"
+    });
+  } catch (error) {
+    console.error("Error during admin login:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
+  }
+});
+
+// === Change Admin Password Route ===
+app.post("/api/admin/change-password", async (req, res) => {
+  try {
+    const { username, currentPassword, newPassword } = req.body;
+
+    // Basic validation
+    if (!username || !currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Username, current password, and new password are required"
+      });
+    }
+
+    // Find admin user
+    const admin = await Admin.findOne({ username: username.toLowerCase() });
+
+    // Check if admin exists
+    if (!admin) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid username"
+      });
+    }
+
+    // Verify current password
+    const passwordMatch = await bcrypt.compare(currentPassword, admin.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Current password is incorrect"
+      });
+    }
+
+    // Hash new password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+    // Update password
+    admin.password = hashedPassword;
+    await admin.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Password updated successfully"
+    });
+  } catch (error) {
+    console.error("Error during password change:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
+  }
 });
 
 // === Form Submission Route ===
@@ -180,51 +329,6 @@ app.post("/api/submit", async (req, res) => {
     });
 
     const savedUser = await newUser.save();
-
-    // --- Send Email Notification (Best effort) ---
-    if (
-      process.env.SENDGRID_API_KEY &&
-      process.env.NOTIFICATION_EMAIL &&
-      process.env.SENDER_EMAIL
-    ) {
-      try {
-        // Compose interestedIn as comma separated string for email
-        const interestedInStr =
-          interestedIn.length > 0 ? interestedIn.join(", ") : "N/A";
-
-        const msg = {
-          to: process.env.NOTIFICATION_EMAIL,
-          from: {
-            email: process.env.SENDER_EMAIL,
-            name: "Connecting Dots ERP Notifications",
-          },
-          replyTo: email,
-          subject: `New Lead: ${name} (${role || "No Role Specified"})`,
-          text: `New lead details:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nCompany: ${company || "N/A"}\nRole: ${role || "N/A"}\nInterested In: ${interestedInStr}\nMessage: ${message || "N/A"}\nSubmitted: ${new Date().toLocaleString()}`,
-          html: `<h3>New Lead Registered</h3>
-                       <p><strong>Name:</strong> ${name}</p>
-                       <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-                       <p><strong>Phone:</strong> ${phone}</p>
-                       <p><strong>Company:</strong> ${company || "N/A"}</p>
-                       <p><strong>Role:</strong> ${role || "N/A"}</p>
-                       <p><strong>Interested In:</strong> ${interestedInStr}</p>
-                       <p><strong>Message:</strong> ${message || "N/A"}</p>
-                       <p><em>Submitted at: ${new Date().toLocaleString()}</em></p>`,
-        };
-        await sgMail.send(msg);
-      } catch (emailError) {
-        console.error(
-          "Error sending email notification:",
-          emailError.response
-            ? JSON.stringify(emailError.response.body)
-            : emailError.message
-        );
-      }
-    } else {
-      console.warn(
-        "Email notification skipped due to missing SendGrid/Email configuration in .env"
-      );
-    }
 
     // --- Success Response to Frontend ---
     return res

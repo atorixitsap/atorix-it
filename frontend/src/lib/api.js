@@ -341,7 +341,6 @@ export async function pingBackend() {
   if (typeof window !== 'undefined') {
     setTimeout(async () => {
       try {
-        console.log('Pinging backend to wake it up...');
         const controller = new AbortController();
         // Set a timeout of 5 seconds for the ping
         const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -352,10 +351,7 @@ export async function pingBackend() {
         });
 
         clearTimeout(timeoutId);
-        console.log('Backend pinged successfully');
       } catch (error) {
-        // Ignore errors - we just want to send the request
-        console.log('Backend ping failed or timed out, may still be waking up');
       }
     }, 100);
   }

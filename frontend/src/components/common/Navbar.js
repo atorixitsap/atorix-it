@@ -7,7 +7,12 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { ThemeToggle } from "../ui/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { useTheme } from "@/components/ui/theme-provider";
 import {
   DropdownMenu,
@@ -38,6 +43,8 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { theme } = useTheme();
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const sheetCloseRef = useRef(null);
 
   // State for hover dropdowns
   const [openCategory, setOpenCategory] = useState(null);
@@ -58,6 +65,14 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu when pathname changes
+  useEffect(() => {
+    if (isSheetOpen && sheetCloseRef.current) {
+      sheetCloseRef.current.click();
+      setIsSheetOpen(false);
+    }
+  }, [pathname, isSheetOpen]);
 
   // Check if current path is a service path
   const isServicePath = pathname.includes("/services");
@@ -111,6 +126,18 @@ export default function Navbar() {
   // Toggle category expansion in mobile menu - modified to handle only one open category
   const toggleCategory = (categoryId) => {
     setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
+  };
+
+  // Function to handle sheet open/close
+  const handleSheetOpenChange = (open) => {
+    setIsSheetOpen(open);
+  };
+
+  // Function to close mobile menu for navigation
+  const closeSheet = () => {
+    if (sheetCloseRef.current) {
+      sheetCloseRef.current.click();
+    }
   };
 
   return (
@@ -256,7 +283,7 @@ export default function Navbar() {
             </Button>
 
             {/* Mobile Menu */}
-            <Sheet>
+            <Sheet open={isSheetOpen} onOpenChange={handleSheetOpenChange}>
               <SheetTrigger asChild className="md:hidden">
                 <Button variant="ghost" size="icon" aria-label="Menu">
                   <Menu className="h-5 w-5" />
@@ -275,6 +302,7 @@ export default function Navbar() {
                       height={30}
                       className="object-contain"
                     />
+                    <SheetClose ref={sheetCloseRef} className="hidden" />
                   </div>
 
                   <nav className="flex flex-col space-y-6 mb-auto">
@@ -288,6 +316,7 @@ export default function Navbar() {
                             ? "text-primary font-semibold"
                             : "text-foreground/80"
                         }`}
+                        onClick={closeSheet}
                       >
                         {link.name}
                       </Link>
@@ -298,7 +327,9 @@ export default function Navbar() {
                       <div
                         className={`text-base font-medium ${isServicePath ? "text-primary font-semibold" : "text-foreground/80"}`}
                       >
-                        Services
+                        <Link href="/services" onClick={closeSheet}>
+                          Services
+                        </Link>
                       </div>
                       <div className="pl-4 space-y-4 border-l border-border/50">
                         {servicesData.categories.map((category) => (
@@ -326,6 +357,7 @@ export default function Navbar() {
                                     key={service.id}
                                     href={`/services/${category.id}/${service.id}`}
                                     className="text-xs text-foreground/70 hover:text-primary block py-1"
+                                    onClick={closeSheet}
                                   >
                                     {service.name}
                                   </Link>
@@ -348,6 +380,7 @@ export default function Navbar() {
                             ? "text-primary font-semibold"
                             : "text-foreground/80"
                         }`}
+                        onClick={closeSheet}
                       >
                         {link.name}
                       </Link>
@@ -356,7 +389,9 @@ export default function Navbar() {
 
                   <div className="pt-6 mt-6 border-t">
                     <Button asChild className="w-full">
-                      <Link href="/get-demo">Get Demo</Link>
+                      <Link href="/get-demo" onClick={closeSheet}>
+                        Get Demo
+                      </Link>
                     </Button>
                   </div>
                 </div>

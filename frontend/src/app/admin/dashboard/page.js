@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import {
   LogOut,
   Trash2,
-  FileExport,
+  Download, // Use Download instead of FileExport
   Search,
   CheckSquare,
   RefreshCw,
@@ -22,7 +22,7 @@ import {
   fetchFormSubmissions,
   deleteFormSubmission,
   deleteBulkFormSubmissions,
-  exportToExcel
+  exportToExcel,
 } from "@/lib/api";
 import { logout } from "@/lib/auth";
 
@@ -83,7 +83,9 @@ export default function Dashboard() {
       setSelectedSubmissions([]);
     } else {
       // Select all
-      setSelectedSubmissions(filteredSubmissions.map(sub => sub._id || sub.id));
+      setSelectedSubmissions(
+        filteredSubmissions.map((sub) => sub._id || sub.id)
+      );
     }
   };
 
@@ -91,10 +93,10 @@ export default function Dashboard() {
   const handleSelectSubmission = (id) => {
     if (selectedSubmissions.includes(id)) {
       // Deselect
-      setSelectedSubmissions(prev => prev.filter(subId => subId !== id));
+      setSelectedSubmissions((prev) => prev.filter((subId) => subId !== id));
     } else {
       // Select
-      setSelectedSubmissions(prev => [...prev, id]);
+      setSelectedSubmissions((prev) => [...prev, id]);
     }
   };
 
@@ -109,15 +111,20 @@ export default function Dashboard() {
 
       if (result.success) {
         // Remove from state
-        setSubmissions(prev => prev.filter(sub => (sub._id || sub.id) !== id));
+        setSubmissions((prev) =>
+          prev.filter((sub) => (sub._id || sub.id) !== id)
+        );
 
         // Remove from selected
-        setSelectedSubmissions(prev => prev.filter(subId => subId !== id));
+        setSelectedSubmissions((prev) => prev.filter((subId) => subId !== id));
 
         // Show success message
         showAlertMessage("success", "Submission deleted successfully");
       } else {
-        showAlertMessage("error", result.error || "Failed to delete submission");
+        showAlertMessage(
+          "error",
+          result.error || "Failed to delete submission"
+        );
       }
     } catch (error) {
       showAlertMessage("error", "An error occurred. Please try again.");
@@ -132,7 +139,11 @@ export default function Dashboard() {
       return;
     }
 
-    if (!window.confirm(`Are you sure you want to delete ${selectedSubmissions.length} submissions?`)) {
+    if (
+      !window.confirm(
+        `Are you sure you want to delete ${selectedSubmissions.length} submissions?`
+      )
+    ) {
       return;
     }
 
@@ -141,8 +152,8 @@ export default function Dashboard() {
 
       if (result.success) {
         // Remove from state
-        setSubmissions(prev =>
-          prev.filter(sub => !selectedSubmissions.includes(sub._id || sub.id))
+        setSubmissions((prev) =>
+          prev.filter((sub) => !selectedSubmissions.includes(sub._id || sub.id))
         );
 
         // Clear selected
@@ -151,7 +162,10 @@ export default function Dashboard() {
         // Show success message
         showAlertMessage("success", result.message);
       } else {
-        showAlertMessage("error", result.error || "Failed to delete submissions");
+        showAlertMessage(
+          "error",
+          result.error || "Failed to delete submissions"
+        );
       }
     } catch (error) {
       showAlertMessage("error", "An error occurred. Please try again.");
@@ -163,9 +177,12 @@ export default function Dashboard() {
   const handleExport = () => {
     try {
       // Get submissions to export (either selected or all filtered)
-      const dataToExport = selectedSubmissions.length > 0
-        ? submissions.filter(sub => selectedSubmissions.includes(sub._id || sub.id))
-        : filteredSubmissions;
+      const dataToExport =
+        selectedSubmissions.length > 0
+          ? submissions.filter((sub) =>
+              selectedSubmissions.includes(sub._id || sub.id)
+            )
+          : filteredSubmissions;
 
       if (dataToExport.length === 0) {
         showAlertMessage("error", "No data to export");
@@ -177,9 +194,12 @@ export default function Dashboard() {
 
       // Create download link
       const url = window.URL.createObjectURL(excelBlob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', `atorix_submissions_${new Date().toISOString().slice(0, 10)}.csv`);
+      link.setAttribute(
+        "download",
+        `atorix_submissions_${new Date().toISOString().slice(0, 10)}.csv`
+      );
       document.body.appendChild(link);
 
       // Trigger download
@@ -189,7 +209,10 @@ export default function Dashboard() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      showAlertMessage("success", `Exported ${dataToExport.length} submissions successfully`);
+      showAlertMessage(
+        "success",
+        `Exported ${dataToExport.length} submissions successfully`
+      );
     } catch (error) {
       showAlertMessage("error", "Failed to export data");
       console.error("Export error:", error);
@@ -200,7 +223,7 @@ export default function Dashboard() {
   const handleSort = (field) => {
     if (sortField === field) {
       // Toggle direction
-      setSortDirection(prev => prev === "asc" ? "desc" : "asc");
+      setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
     } else {
       // New field
       setSortField(field);
@@ -221,7 +244,7 @@ export default function Dashboard() {
 
   // Filter submissions
   const filteredSubmissions = submissions
-    .filter(sub => {
+    .filter((sub) => {
       // First apply form type filter
       if (filterType !== "all") {
         if (!sub.formType) return false;
@@ -229,7 +252,7 @@ export default function Dashboard() {
       }
       return true;
     })
-    .filter(sub => {
+    .filter((sub) => {
       // Then apply search term
       if (!searchTerm) return true;
 
@@ -333,11 +356,13 @@ export default function Dashboard() {
         <main className="container mx-auto px-4 py-8">
           {/* Alert Message */}
           {showAlert && (
-            <div className={`mb-6 p-4 rounded-lg flex items-start justify-between ${
-              alertMessage.type === "success"
-                ? "bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300"
-                : "bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300"
-            }`}>
+            <div
+              className={`mb-6 p-4 rounded-lg flex items-start justify-between ${
+                alertMessage.type === "success"
+                  ? "bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300"
+                  : "bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300"
+              }`}
+            >
               <div className="flex items-start">
                 {alertMessage.type === "success" ? (
                   <CheckSquare className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
@@ -398,7 +423,9 @@ export default function Dashboard() {
                 onClick={fetchSubmissions}
                 disabled={loading}
               >
-                <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+                <RefreshCw
+                  className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
+                />
                 Refresh
               </Button>
 
@@ -409,7 +436,7 @@ export default function Dashboard() {
                 onClick={handleExport}
                 disabled={submissions.length === 0}
               >
-                <FileExport className="h-4 w-4" />
+                <Download className="h-4 w-4" />
                 Export
               </Button>
 
@@ -459,7 +486,11 @@ export default function Dashboard() {
                         <div className="flex items-center">
                           <input
                             type="checkbox"
-                            checked={selectedSubmissions.length === filteredSubmissions.length && filteredSubmissions.length > 0}
+                            checked={
+                              selectedSubmissions.length ===
+                                filteredSubmissions.length &&
+                              filteredSubmissions.length > 0
+                            }
                             onChange={handleSelectAll}
                             className="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
                           />
@@ -472,11 +503,12 @@ export default function Dashboard() {
                           onClick={() => handleSort("name")}
                         >
                           Name
-                          {sortField === "name" && (
-                            sortDirection === "asc" ?
-                              <ChevronUp className="h-4 w-4 ml-1" /> :
+                          {sortField === "name" &&
+                            (sortDirection === "asc" ? (
+                              <ChevronUp className="h-4 w-4 ml-1" />
+                            ) : (
                               <ChevronDown className="h-4 w-4 ml-1" />
-                          )}
+                            ))}
                         </button>
                       </th>
 
@@ -486,11 +518,12 @@ export default function Dashboard() {
                           onClick={() => handleSort("email")}
                         >
                           Email
-                          {sortField === "email" && (
-                            sortDirection === "asc" ?
-                              <ChevronUp className="h-4 w-4 ml-1" /> :
+                          {sortField === "email" &&
+                            (sortDirection === "asc" ? (
+                              <ChevronUp className="h-4 w-4 ml-1" />
+                            ) : (
                               <ChevronDown className="h-4 w-4 ml-1" />
-                          )}
+                            ))}
                         </button>
                       </th>
 
@@ -500,11 +533,12 @@ export default function Dashboard() {
                           onClick={() => handleSort("phone")}
                         >
                           Phone
-                          {sortField === "phone" && (
-                            sortDirection === "asc" ?
-                              <ChevronUp className="h-4 w-4 ml-1" /> :
+                          {sortField === "phone" &&
+                            (sortDirection === "asc" ? (
+                              <ChevronUp className="h-4 w-4 ml-1" />
+                            ) : (
                               <ChevronDown className="h-4 w-4 ml-1" />
-                          )}
+                            ))}
                         </button>
                       </th>
 
@@ -514,15 +548,18 @@ export default function Dashboard() {
                           onClick={() => handleSort("company")}
                         >
                           Company
-                          {sortField === "company" && (
-                            sortDirection === "asc" ?
-                              <ChevronUp className="h-4 w-4 ml-1" /> :
+                          {sortField === "company" &&
+                            (sortDirection === "asc" ? (
+                              <ChevronUp className="h-4 w-4 ml-1" />
+                            ) : (
                               <ChevronDown className="h-4 w-4 ml-1" />
-                          )}
+                            ))}
                         </button>
                       </th>
 
-                      <th className="px-4 py-3 text-left hidden xl:table-cell">Form Type</th>
+                      <th className="px-4 py-3 text-left hidden xl:table-cell">
+                        Form Type
+                      </th>
 
                       <th className="px-4 py-3 text-left">
                         <button
@@ -530,11 +567,12 @@ export default function Dashboard() {
                           onClick={() => handleSort("createdAt")}
                         >
                           Date
-                          {sortField === "createdAt" && (
-                            sortDirection === "asc" ?
-                              <ChevronUp className="h-4 w-4 ml-1" /> :
+                          {sortField === "createdAt" &&
+                            (sortDirection === "asc" ? (
+                              <ChevronUp className="h-4 w-4 ml-1" />
+                            ) : (
                               <ChevronDown className="h-4 w-4 ml-1" />
-                          )}
+                            ))}
                         </button>
                       </th>
 
@@ -573,17 +611,21 @@ export default function Dashboard() {
                           </td>
 
                           <td className="px-4 py-4 hidden xl:table-cell">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                              getFormType(submission) === "Demo Request"
-                                ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
-                                : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-                            }`}>
+                            <span
+                              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                getFormType(submission) === "Demo Request"
+                                  ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
+                                  : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                              }`}
+                            >
                               {getFormType(submission)}
                             </span>
                           </td>
 
                           <td className="px-4 py-4">
-                            {formatDate(submission.createdAt || submission.date)}
+                            {formatDate(
+                              submission.createdAt || submission.date
+                            )}
                           </td>
 
                           <td className="px-4 py-4 text-right">
@@ -610,13 +652,13 @@ export default function Dashboard() {
             <p>
               {filteredSubmissions.length} results
               {searchTerm && ` for "${searchTerm}"`}
-              {filterType !== "all" && ` in ${filterType === "contact" ? "Contact Forms" : "Demo Requests"}`}
+              {filterType !== "all" &&
+                ` in ${filterType === "contact" ? "Contact Forms" : "Demo Requests"}`}
             </p>
 
             <p>
-              {selectedSubmissions.length > 0 && (
-                `${selectedSubmissions.length} selected`
-              )}
+              {selectedSubmissions.length > 0 &&
+                `${selectedSubmissions.length} selected`}
             </p>
           </div>
         </main>

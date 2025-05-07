@@ -33,7 +33,9 @@ export async function submitWeb3FormData(formData) {
     });
 
     // Optionally set subject
-    web3FormData.append('subject', `New Contact Form Submission from ${formData.name || 'Website Visitor'}`);
+    if (!formData.subject) {
+      web3FormData.append('subject', `New Form Submission from ${formData.name || 'Website Visitor'}`);
+    }
 
     // You can add a hidden honeypot field to prevent spam
     web3FormData.append('botcheck', '');
@@ -60,37 +62,79 @@ export async function submitWeb3FormData(formData) {
 }
 
 /**
- * Submit form data to the backend API
+ * Submit form data to the backend API with retry capability for cold starts
  * @param {Object} formData - The form data to submit
+ * @param {Number} retries - Number of retry attempts (default: 2)
+ * @param {Number} timeout - Timeout in milliseconds (default: 8000)
  * @returns {Promise} - Response from the API
  */
-export async function submitFormData(formData) {
-  try {
+export async function submitFormData(formData, retries = 2, timeout = 8000) {
+  // Start with retry count
+  let attempts = 0;
+  let lastError = null;
 
-    const response = await fetch(`${API_BASE_URL}/api/submit`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
+  // Create AbortController for the timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-    // Parse the JSON response
-    const data = await response.json();
+  while (attempts <= retries) {
+    attempts++;
 
-    // If the response is not ok, throw an error with the message from the API
-    if (!response.ok) {
-      throw new Error(data.message || 'An error occurred while submitting the form');
+    try {
+      // Clear any previous timeout just in case
+      clearTimeout(timeoutId);
+
+      // Set a new timeout for this attempt
+      const newTimeoutId = setTimeout(() => controller.abort(), timeout);
+
+      const response = await fetch(`${API_BASE_URL}/api/submit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        signal: controller.signal
+      });
+
+      // Clear the timeout since we got a response
+      clearTimeout(newTimeoutId);
+
+      // Parse the JSON response
+      const data = await response.json();
+
+      // If the response is not ok, throw an error with the message from the API
+      if (!response.ok) {
+        throw new Error(data.message || 'An error occurred while submitting the form');
+      }
+
+      return { success: true, data };
+    } catch (error) {
+      // Store the last error
+      lastError = error;
+
+      // If it's an abort error (timeout) or we've reached max retries, break
+      if (error.name === 'AbortError') {
+        console.warn(`Request timed out after ${timeout}ms, attempt ${attempts} of ${retries + 1}`);
+      } else {
+        console.warn(`Error submitting form, attempt ${attempts} of ${retries + 1}:`, error);
+      }
+
+      // If we have retries left, wait before trying again (exponential backoff)
+      if (attempts <= retries) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempts - 1)));
+      } else {
+        // No more retries
+        break;
+      }
     }
-
-    return { success: true, data };
-  } catch (error) {
-    console.error('Error submitting form:', error);
-    return {
-      success: false,
-      error: error.message || 'An unexpected error occurred'
-    };
   }
+
+  // If we've exhausted all retries, return the error
+  console.error('Error submitting form after all retries:', lastError);
+  return {
+    success: false,
+    error: (lastError && lastError.message) || 'An unexpected error occurred'
+  };
 }
 
 /**

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, Send, AlertCircle } from "lucide-react";
-import { submitWeb3FormData } from "@/lib/api";
+import { submitWeb3FormData, submitFormData } from "@/lib/api";
 
 export default function GetDemoPage() {
   const [formData, setFormData] = useState({
@@ -106,7 +106,7 @@ export default function GetDemoPage() {
     setApiError(null);
 
     try {
-      // Prepare data for Web3Forms
+      // 1. First submit to Web3Forms for immediate email notification
       // Convert the interests array to a string for easier email reading
       const formattedFormData = {
         ...formData,
@@ -115,9 +115,25 @@ export default function GetDemoPage() {
       };
 
       // Submit the form data to Web3Forms
-      const result = await submitWeb3FormData(formattedFormData);
+      const web3Result = await submitWeb3FormData(formattedFormData);
 
-      if (result.success) {
+      // 2. Then try to submit to backend for database storage
+      let backendSuccess = false;
+      try {
+        // Normalize data for backend submission - the backend expects interestedIn array
+        const backendFormData = {
+          ...formData,
+          interestedIn: formData.interests
+        };
+
+        const backendResult = await submitFormData(backendFormData);
+        backendSuccess = backendResult.success;
+      } catch (backendError) {
+        console.warn("Backend submission failed, but email was sent via Web3Forms:", backendError);
+        // We don't fail the whole submission if only backend fails but web3forms succeeded
+      }
+
+      if (web3Result.success) {
         setSubmitted(true);
 
         // Reset form data
@@ -138,7 +154,7 @@ export default function GetDemoPage() {
         setTimeout(() => setSubmitted(false), 5000);
       } else {
         // Handle API error
-        setApiError(result.error);
+        setApiError(web3Result.error);
       }
     } catch (error) {
       // Handle unexpected error

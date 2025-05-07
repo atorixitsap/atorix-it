@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Send, AlertCircle, CheckCircle } from "lucide-react";
-import { submitWeb3FormData } from "@/lib/api";
+import { submitWeb3FormData, submitFormData } from "@/lib/api";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -84,10 +84,24 @@ export default function ContactForm() {
     setApiError(null);
 
     try {
-      // Submit data to Web3Forms
-      const result = await submitWeb3FormData(formData);
+      // 1. First submit to Web3Forms for immediate email notification
+      const formattedFormData = {
+        ...formData,
+        subject: `Contact Form Submission from ${formData.name}`,
+      };
+      const web3Result = await submitWeb3FormData(formattedFormData);
 
-      if (result.success) {
+      // 2. Then try to submit to backend for database storage
+      let backendSuccess = false;
+      try {
+        const backendResult = await submitFormData(formData);
+        backendSuccess = backendResult.success;
+      } catch (backendError) {
+        console.warn("Backend submission failed, but email was sent via Web3Forms:", backendError);
+        // We don't fail the whole submission if only backend fails but web3forms succeeded
+      }
+
+      if (web3Result.success) {
         setSubmitted(true);
         // Reset form data
         setFormData({
@@ -107,7 +121,7 @@ export default function ContactForm() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         // Handle API error
-        setApiError(result.error);
+        setApiError(web3Result.error);
       }
     } catch (error) {
       // Handle unexpected error

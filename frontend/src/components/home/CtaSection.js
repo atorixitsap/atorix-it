@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, PhoneCall, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
-import { submitFormData, normalizeFormData } from "@/lib/api";
+import { submitFormData, submitWeb3FormData } from "@/lib/api";
 
 export default function CtaSection() {
   const canvasRef = useRef(null);
@@ -145,12 +145,12 @@ export default function CtaSection() {
 
   // Handle form field changes
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
 
     // Clear error for this field
-    if (errors[id]) {
-      setErrors((prev) => ({ ...prev, [id]: undefined }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
 
     // Clear API error when user makes changes
@@ -176,10 +176,27 @@ export default function CtaSection() {
     setApiError(null);
 
     try {
-      // Submit data directly to the API (fields are already named correctly)
-      const result = await submitFormData(formData);
+      // 1. First, submit data to Web3Forms for immediate email notification
+      const formattedFormData = {
+        ...formData,
+        subject: "Home Page Inquiry from " + formData.name,
+      };
 
-      if (result.success) {
+      const web3Result = await submitWeb3FormData(formattedFormData);
+
+      let backendSuccess = false;
+
+      // 2. Then try to submit to backend for database storage
+      try {
+        const backendResult = await submitFormData(formData);
+        backendSuccess = backendResult.success;
+      } catch (backendError) {
+        console.warn("Backend submission failed, but email was sent via Web3Forms:", backendError);
+        // We don't fail the whole submission if only backend fails but web3forms succeeded
+      }
+
+      // Consider the submission successful if at least web3forms worked
+      if (web3Result.success) {
         setSubmitted(true);
 
         // Reset form data
@@ -196,8 +213,8 @@ export default function CtaSection() {
           setSubmitted(false);
         }, 5000);
       } else {
-        // Handle API error
-        setApiError(result.error);
+        // Handle API error from web3forms
+        setApiError(web3Result.error);
       }
     } catch (error) {
       // Handle unexpected error
@@ -308,12 +325,21 @@ export default function CtaSection() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Hidden honeypot field to prevent spam */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                style={{ display: 'none' }}
+              />
+
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">
                   Your Name <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
                   value={formData.name}
                   onChange={handleChange}
@@ -339,6 +365,7 @@ export default function CtaSection() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -364,6 +391,7 @@ export default function CtaSection() {
                 </label>
                 <input
                   id="phone"
+                  name="phone"
                   type="tel"
                   value={formData.phone}
                   onChange={handleChange}
@@ -389,6 +417,7 @@ export default function CtaSection() {
                 </label>
                 <input
                   id="company"
+                  name="company"
                   type="text"
                   value={formData.company}
                   onChange={handleChange}
@@ -403,6 +432,7 @@ export default function CtaSection() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}

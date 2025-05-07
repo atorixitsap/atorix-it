@@ -82,6 +82,11 @@ const User = mongoose.model("User", userSchema);
 
 // --- API Routes ---
 
+// === Simple Ping Endpoint to Wake Up Server ===
+app.get('/api/ping', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'Server is awake', timestamp: new Date().toISOString() });
+});
+
 // === Form Submission Route ===
 app.post("/api/submit", async (req, res) => {
 

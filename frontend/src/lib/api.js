@@ -196,3 +196,167 @@ export function normalizeFormData(formData) {
 
   return normalizedData;
 }
+
+/**
+ * Fetch all form submissions from the backend
+ * @returns {Promise} - Response from the API with form submissions
+ */
+export async function fetchFormSubmissions() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/submissions`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to fetch form submissions');
+    }
+
+    return { success: true, data: data.submissions || [] };
+  } catch (error) {
+    console.error('Error fetching form submissions:', error);
+    return {
+      success: false,
+      error: error.message || 'An unexpected error occurred',
+      data: []
+    };
+  }
+}
+
+/**
+ * Delete a single form submission
+ * @param {string} id - The ID of the submission to delete
+ * @returns {Promise} - Response from the API
+ */
+export async function deleteFormSubmission(id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/submissions/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to delete submission');
+    }
+
+    return { success: true, message: 'Submission deleted successfully' };
+  } catch (error) {
+    console.error('Error deleting form submission:', error);
+    return {
+      success: false,
+      error: error.message || 'An unexpected error occurred'
+    };
+  }
+}
+
+/**
+ * Delete multiple form submissions
+ * @param {Array<string>} ids - The IDs of the submissions to delete
+ * @returns {Promise} - Response from the API
+ */
+export async function deleteBulkFormSubmissions(ids) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/submissions/bulk-delete`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ids }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to delete submissions');
+    }
+
+    return {
+      success: true,
+      message: `${ids.length} submissions deleted successfully`
+    };
+  } catch (error) {
+    console.error('Error deleting form submissions:', error);
+    return {
+      success: false,
+      error: error.message || 'An unexpected error occurred'
+    };
+  }
+}
+
+/**
+ * Export form submissions to Excel format
+ * @param {Array} submissions - The submissions to export
+ * @returns {Blob} - Excel file as a Blob
+ */
+export function exportToExcel(submissions) {
+  // We'll use client-side approach to create an Excel file
+  // This is a simple implementation - in production, consider using a library like XLSX or ExcelJS
+
+  // Create CSV content
+  let csvContent = "ID,Name,Email,Phone,Company,Role,Message,Date\n";
+
+  submissions.forEach(sub => {
+    // Format date
+    const date = sub.createdAt ? new Date(sub.createdAt).toLocaleString() : 'N/A';
+
+    // Escape fields to handle commas within fields
+    const escapeCsv = (field) => {
+      const value = field || '';
+      return `"${value.replace(/"/g, '""')}"`;
+    };
+
+    // Add row to CSV
+    csvContent += [
+      escapeCsv(sub._id || sub.id),
+      escapeCsv(sub.name),
+      escapeCsv(sub.email),
+      escapeCsv(sub.phone),
+      escapeCsv(sub.company),
+      escapeCsv(sub.role),
+      escapeCsv(sub.message),
+      escapeCsv(date)
+    ].join(',') + '\n';
+  });
+
+  // Create Blob
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  return blob;
+}
+
+/**
+ * Ping the backend to wake it up from sleep on render.com
+ * @returns {Promise<void>}
+ */
+export async function pingBackend() {
+  // Don't need to await the response or handle errors - we just want to send a request
+  // to wake up the backend. Use a timeout to not block page rendering.
+  if (typeof window !== 'undefined') {
+    setTimeout(async () => {
+      try {
+        console.log('Pinging backend to wake it up...');
+        const controller = new AbortController();
+        // Set a timeout of 5 seconds for the ping
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        await fetch(`${API_BASE_URL}/api/ping`, {
+          method: 'GET',
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+        console.log('Backend pinged successfully');
+      } catch (error) {
+        // Ignore errors - we just want to send the request
+        console.log('Backend ping failed or timed out, may still be waking up');
+      }
+    }, 100);
+  }
+}

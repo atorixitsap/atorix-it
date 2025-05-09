@@ -19,8 +19,8 @@ if (!process.env.MONGODB_URI) {
 
 // --- CORS Configuration ---
 const allowedOrigins = [
-  "https://atorixit.in", // Main domain
-  "https://www.atorixit.in", // Optional www subdomain
+  "https://atorixit.com", // Main domain
+  "https://www.atorixit.com", // Optional www subdomain
   "https://atorix-testing.vercel.app", // Testing domain
   "http://localhost:3000", // For local development
   "http://localhost:5000", // For local development alternative port

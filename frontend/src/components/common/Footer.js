@@ -32,7 +32,7 @@ export default function Footer() {
                 alt="Atorix IT Logo"
                 width={180}
                 height={50}
-                className={`object-contain ${theme === "dark" ? "bg-gray-300 rounded-lg" : "bg-transparent"}`}
+                className={`object-contain ${theme === "dark" ? "bg-white rounded-lg" : "bg-transparent"}`}
               />
             </Link>
             <p className="text-muted-foreground mb-6">

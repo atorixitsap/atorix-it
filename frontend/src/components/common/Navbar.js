@@ -153,7 +153,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className={`flex items-center space-x-2 ${theme === "dark" ? "bg-gray-200 rounded-lg" : "bg-transparent"}`}
+            className={`flex items-center space-x-2 ${theme === "dark" ? "bg-white rounded-lg" : "bg-transparent"}`}
           >
             <Image
               src="/AtorixIT.png"

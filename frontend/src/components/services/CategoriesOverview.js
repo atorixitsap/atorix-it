@@ -5,7 +5,7 @@ import servicesData from "@/data/services.json";
 
 export default function CategoriesOverview() {
   return (
-    <section className="py-16 relative bg-[#d4e8eb]">
+    <section className="py-16 relative">
       {/* Subtle background pattern for categories section */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]"></div>
 

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -97,7 +97,10 @@ export default function ContactForm() {
         const backendResult = await submitFormData(formData);
         backendSuccess = backendResult.success;
       } catch (backendError) {
-        console.warn("Backend submission failed, but email was sent via Web3Forms:", backendError);
+        console.warn(
+          "Backend submission failed, but email was sent via Web3Forms:",
+          backendError
+        );
         // We don't fail the whole submission if only backend fails but web3forms succeeded
       }
 
@@ -163,8 +166,7 @@ export default function ContactForm() {
             <div>
               <p className="font-medium">Thank you for your message!</p>
               <p className="text-sm mt-1">
-                We have received your inquiry and will get back to you
-                shortly.
+                We have received your inquiry and will get back to you shortly.
               </p>
             </div>
           </motion.div>
@@ -193,7 +195,7 @@ export default function ContactForm() {
             type="checkbox"
             name="botcheck"
             className="hidden"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

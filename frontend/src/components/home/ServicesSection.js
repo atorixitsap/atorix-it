@@ -117,7 +117,7 @@ export default function ServicesSection() {
   };
 
   const headerVariants = {
-    hidden: { y: -20, opacity: 0 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import FloatingContactButtons from "@/components/common/FloatingContactButtons";
+import PopupContactForm from "@/components/common/PopupContactForm";
 import { pingBackend } from "@/lib/api";
 import "./globals.css";
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
           <main className="min-h-[calc(100vh-4rem)]">{children}</main>
           <Footer />
           <FloatingContactButtons />
+          <PopupContactForm />
         </ThemeProvider>
       </body>
     </html>

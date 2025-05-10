@@ -1,15 +1,22 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { Phone, MessageCircle, X, Mail, HelpCircle, ChevronUp } from 'lucide-react';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from "react";
+import {
+  Phone,
+  MessageCircle,
+  X,
+  Mail,
+  HelpCircle,
+  ChevronUp,
+} from "lucide-react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function FloatingContactButtons() {
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(null);
-  const phoneNumber = '+918956001555'; // Phone number for both call and WhatsApp
+  const phoneNumber = "+918956001555"; // Phone number for both call and WhatsApp
 
   // Show the floating buttons after scrolling down a bit
   useEffect(() => {
@@ -23,8 +30,8 @@ export default function FloatingContactButtons() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Toggle expanded state
@@ -47,7 +54,7 @@ export default function FloatingContactButtons() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
@@ -56,43 +63,43 @@ export default function FloatingContactButtons() {
   // Contact options configuration
   const contactOptions = [
     {
-      id: 'whatsapp',
+      id: "whatsapp",
       icon: <MessageCircle size={22} />,
-      ariaLabel: 'Contact via WhatsApp',
-      tooltip: 'Message on WhatsApp',
-      href: `https://wa.me/${phoneNumber.replace(/\+/g, '')}`,
-      bgColor: 'bg-green-500',
-      hoverBgColor: 'hover:bg-green-600',
+      ariaLabel: "Contact via WhatsApp",
+      tooltip: "Message on WhatsApp",
+      href: `https://wa.me/${phoneNumber.replace(/\+/g, "")}`,
+      bgColor: "bg-green-500",
+      hoverBgColor: "hover:bg-green-600",
       external: true,
     },
     {
-      id: 'call',
+      id: "call",
       icon: <Phone size={22} />,
-      ariaLabel: 'Call us',
-      tooltip: 'Call us now',
+      ariaLabel: "Call us",
+      tooltip: "Call us now",
       href: `tel:${phoneNumber}`,
-      bgColor: 'bg-blue-500',
-      hoverBgColor: 'hover:bg-blue-600',
+      bgColor: "bg-blue-500",
+      hoverBgColor: "hover:bg-blue-600",
       external: false,
     },
     {
-      id: 'email',
+      id: "email",
       icon: <Mail size={22} />,
-      ariaLabel: 'Email us',
-      tooltip: 'Send us an email',
-      href: '/contact',
-      bgColor: 'bg-violet-500',
-      hoverBgColor: 'hover:bg-violet-600',
-      external: false,
+      ariaLabel: "Email us",
+      tooltip: "Send us an email",
+      href: "mailto:info@atorix.in",
+      bgColor: "bg-violet-500",
+      hoverBgColor: "hover:bg-violet-600",
+      external: true,
     },
     {
-      id: 'help',
+      id: "help",
       icon: <HelpCircle size={22} />,
-      ariaLabel: 'Get help',
-      tooltip: 'How can we help?',
-      href: '/get-demo',
-      bgColor: 'bg-amber-500',
-      hoverBgColor: 'hover:bg-amber-600',
+      ariaLabel: "Get help",
+      tooltip: "How can we help?",
+      href: "/contact",
+      bgColor: "bg-amber-500",
+      hoverBgColor: "hover:bg-amber-600",
       external: false,
     },
   ];
@@ -104,14 +111,14 @@ export default function FloatingContactButtons() {
       opacity: 1,
       transition: {
         when: "beforeChildren",
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    visible: { y: 0, opacity: 1 },
   };
 
   const pulseAnimation = {
@@ -119,8 +126,8 @@ export default function FloatingContactButtons() {
     transition: {
       duration: 1.5,
       repeat: Infinity,
-      repeatType: "loop"
-    }
+      repeatType: "loop",
+    },
   };
 
   return (
@@ -197,8 +204,8 @@ export default function FloatingContactButtons() {
         onClick={toggleExpanded}
         className={`p-4 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
           expanded
-            ? 'bg-red-500 text-white hover:bg-red-600'
-            : 'bg-primary text-white hover:bg-primary/90'
+            ? "bg-red-500 text-white hover:bg-red-600"
+            : "bg-primary text-white hover:bg-primary/90"
         }`}
         aria-label="Toggle contact options"
         whileHover={{ scale: 1.1 }}
@@ -209,11 +216,7 @@ export default function FloatingContactButtons() {
           animate={{ rotate: expanded ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          {expanded ? (
-            <X size={24} />
-          ) : (
-            <Phone size={24} />
-          )}
+          {expanded ? <X size={24} /> : <Phone size={24} />}
         </motion.div>
       </motion.button>
     </div>

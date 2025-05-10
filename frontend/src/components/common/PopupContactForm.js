@@ -37,7 +37,7 @@ export default function PopupContactForm() {
     }
 
     // Delayed appearance for better UX
-    const timer = setTimeout(() => setOpen(true), 2000); // 2 seconds delay
+    const timer = setTimeout(() => setOpen(true), 15000); // 2 seconds delay
     return () => clearTimeout(timer);
   }, []);
 

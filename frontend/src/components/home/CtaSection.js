@@ -295,7 +295,7 @@ export default function CtaSection() {
           </div>
 
           {/* Right column - Contact form */}
-          <div className="bg-white dark:bg-background rounded-xl p-8 shadow-xl">
+          <div className="bg-muted rounded-xl p-8 shadow-xl">
             <h3 className="text-xl font-semibold mb-6 text-center">
               Get in Touch with Our Team
             </h3>
@@ -347,7 +347,7 @@ export default function CtaSection() {
                   className={
                     "w-full px-4 py-2 rounded-md border " +
                     (errors.name ? "border-red-500 dark:border-red-400" : "border-input") +
-                    " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                    " bg-muted focus:border-primary focus:ring-1 focus:ring-primary"
                   }
                   placeholder="Enter your full name"
                 />
@@ -373,7 +373,7 @@ export default function CtaSection() {
                   className={
                     "w-full px-4 py-2 rounded-md border " +
                     (errors.email ? "border-red-500 dark:border-red-400" : "border-input") +
-                    " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                    " bg-muted focus:border-primary focus:ring-1 focus:ring-primary"
                   }
                   placeholder="Enter your email"
                 />
@@ -399,7 +399,7 @@ export default function CtaSection() {
                   className={
                     "w-full px-4 py-2 rounded-md border " +
                     (errors.phone ? "border-red-500 dark:border-red-400" : "border-input") +
-                    " bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                    " bg-muted focus:border-primary focus:ring-1 focus:ring-primary"
                   }
                   placeholder="Enter your phone number"
                 />
@@ -421,7 +421,7 @@ export default function CtaSection() {
                   type="text"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-md border border-input bg-background focus:border-primary focus:ring-1 focus:ring-primary"
+                  className="w-full px-4 py-2 rounded-md border border-input bg-muted focus:border-primary focus:ring-1 focus:ring-primary"
                   placeholder="Enter your company name"
                 />
               </div>
@@ -436,7 +436,7 @@ export default function CtaSection() {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-md border border-input bg-background focus:border-primary focus:ring-1 focus:ring-primary resize-none"
+                  className="w-full px-4 py-2 rounded-md border border-input bg-muted focus:border-primary focus:ring-1 focus:ring-primary resize-none"
                   placeholder="Tell us about your requirements"
                 ></textarea>
               </div>

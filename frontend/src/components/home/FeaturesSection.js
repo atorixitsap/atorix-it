@@ -79,7 +79,7 @@ function FeatureCard({ icon, title, description, index }) {
       onHoverEnd={() => setIsHovered(false)}
     >
       <motion.div
-        className="group p-6 rounded-xl bg-card border border-border/50 hover:border-primary/50 hover:shadow-xl transition-all duration-500 h-full backdrop-blur-sm relative overflow-hidden"
+        className="group p-6 rounded-xl dark:bg-background/60 border border-border/50 hover:border-primary/50 hover:shadow-xl transition-all duration-500 h-full backdrop-blur-sm relative overflow-hidden"
         animate={{
           rotateX: isHovered ? 5 : 0,
           rotateY: isHovered ? 5 : 0,
@@ -180,7 +180,7 @@ export default function FeaturesSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-muted/30 relative overflow-hidden">
       {/* Dynamic background effects */}
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/5 rounded-full blur-3xl opacity-70 pointer-events-none"

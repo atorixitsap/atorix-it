@@ -13,7 +13,7 @@ export default function ServiceCard({ icon, title, description, delay = 0, href 
 
   return (
     <Card
-      className={`group overflow-hidden border-border/40 transition-all duration-300 hover:border-primary/30 hover:shadow-md dark:bg-background/90 relative h-full ${className}`}
+      className={`group overflow-hidden border-border/40 transition-all duration-300 hover:border-primary/30 hover:shadow-md dark:bg-background/30 relative h-full ${className}`}
     >
       {/* 3D hover effect overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>

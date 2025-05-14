@@ -18,7 +18,7 @@ export default function Footer() {
   const { theme } = useTheme();
 
   return (
-    <footer className="bg-muted py-16 border-t">
+    <footer className="py-16 border-t">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Company Info */}

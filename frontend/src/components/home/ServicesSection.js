@@ -130,7 +130,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-secondary/30 relative overflow-hidden bg-grid-pattern">
+    <section id="services" className="py-16 md:py-24 bg-muted relative overflow-hidden bg-grid-pattern">
       {/* Decorative background elements */}
       <motion.div
         className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"

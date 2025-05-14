@@ -78,7 +78,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-muted/30 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl opacity-50"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl opacity-50"></div>
@@ -107,7 +107,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Current testimonial */}
-          <div className="relative bg-card rounded-xl p-8 md:p-10 shadow-lg border border-border/40">
+          <div className="relative dark:bg-background/50 dark:hover:bg-background/60 rounded-xl p-8 md:p-10 shadow-lg border border-border/40">
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Company logo and person info */}
               <div className="md:w-1/4 flex flex-col items-center md:items-start">

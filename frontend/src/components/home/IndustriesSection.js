@@ -145,7 +145,7 @@ export default function EnhancedIndustriesSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-background to-background/50">
+    <section className="py-16 md:py-24 relative overflow-hidden bg-muted">
       {/* Dynamic animated background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-5 pointer-events-none" />
 

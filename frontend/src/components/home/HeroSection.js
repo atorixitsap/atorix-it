@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import LogoSphere from "@/components/ui/LogoSphere";
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   // Add scroll animation for the "Scroll Down" button
@@ -31,6 +32,19 @@ export default function HeroSection() {
       }
     };
   }, []);
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 50,
+        damping: 10,
+      },
+    },
+  };
 
   return (
     <section className="relative overflow-hidden min-h-[90vh]">
@@ -415,16 +429,30 @@ export default function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <Button
-                size="lg"
-                asChild
-                className="px-8 gap-2 bg-gradient-hero hover:shadow-lg"
-              >
-                <Link href="/contact">
-                  Get Started
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
+              <motion.div variants={itemVariants}>
+                <Button
+                  asChild
+                  className="gap-2 px-6 py-5 text-sm font-medium bg-gradient-hero shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 relative overflow-hidden group btn-3d"
+                >
+                  <Link href="/contact">
+                    {/* Glow effect */}
+                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary/0 via-white/30 to-primary/0 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000"></span>
+
+                    <span className="relative z-10 flex items-center">
+                      Get Started
+                      <motion.div
+                        whileHover={{ x: 5 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 10,
+                        }}
+                      ></motion.div>
+                    </span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </motion.div>
               <Button
                 variant="outline"
                 size="lg"

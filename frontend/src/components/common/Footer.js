@@ -144,7 +144,7 @@ export default function Footer() {
                   href="/services/sap-application/implementation-rollout"
                   className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
                 >
-                  SAP Implementation
+                  SAP S/4 Implementation
                 </Link>
               </li>
               <li>
@@ -152,7 +152,7 @@ export default function Footer() {
                   href="/services/sap-application/sap-ecc-s4-hana-support"
                   className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
                 >
-                  SAP Support
+                  SAP S/4 Support
                 </Link>
               </li>
               <li>
@@ -160,7 +160,7 @@ export default function Footer() {
                   href="/services/sap-application/sap-integration"
                   className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
                 >
-                  SAP Integration
+                  SAP S/4 Integration
                 </Link>
               </li>
               <li>
@@ -168,7 +168,7 @@ export default function Footer() {
                   href="/services/sap-application/upgrade-services"
                   className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
                 >
-                  SAP Upgrade
+                  SAP S/4 Upgrade
                 </Link>
               </li>
               <li>
@@ -176,7 +176,23 @@ export default function Footer() {
                   href="/services/sap-application/sap-s4-hana-migration"
                   className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
                 >
-                  SAP Migration
+                  SAP S/4 Migration
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/sap-application/sap-business-one-implementation"
+                  className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
+                >
+                  SAP Business One Implementation 
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/sap-application/sap-s4-hana-migration"
+                  className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
+                >
+                  Data Science
                 </Link>
               </li>
             </ul>

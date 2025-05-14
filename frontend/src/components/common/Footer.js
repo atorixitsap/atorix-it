@@ -184,15 +184,31 @@ export default function Footer() {
                   href="/services/sap-application/sap-business-one-implementation"
                   className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
                 >
-                  SAP Business One Implementation 
+                  SAP Business One Implementation
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/services/sap-application/sap-s4-hana-migration"
+                  href="/services/data-science"
                   className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
                 >
                   Data Science
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/data-science/machine-learning"
+                  className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
+                >
+                  Machine Learning
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/data-science/data-analytics"
+                  className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center"
+                >
+                  Data Analytics
                 </Link>
               </li>
             </ul>

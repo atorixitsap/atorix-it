@@ -1,5 +1,600 @@
 {
   "serviceDetails": {
+    "data-science": {
+      "data-analytics": {
+        "testimonials": [
+          {
+            "name": "Vikram Mehta",
+            "role": "CIO",
+            "company": "Global Retail Solutions",
+            "content": "Atorix IT's data analytics team helped us make sense of our complex customer data. Their insights directly contributed to a 15% increase in customer retention and significant revenue growth.",
+            "rating": 5
+          },
+          {
+            "name": "Priya Sharma",
+            "role": "Director of Operations",
+            "company": "NextGen Manufacturing",
+            "content": "The advanced analytics solution delivered by Atorix transformed how we approach process optimization. We can now predict maintenance needs with remarkable accuracy, reducing downtime by over 30%.",
+            "rating": 5
+          }
+        ],
+        "faqs": [
+          {
+            "question": "How quickly can we expect to see results from data analytics implementation?",
+            "answer": "The timeline for seeing results varies based on your specific project scope and data readiness. Typically, our clients begin seeing initial insights within 4-6 weeks of project initiation. Quick-win dashboards and reports can be delivered in this timeframe, while more complex predictive models may take 2-3 months to develop, validate, and implement. We establish clear milestones and KPIs at the outset to track progress and demonstrate value throughout the engagement."
+          },
+          {
+            "question": "What data sources can you work with for analytics projects?",
+            "answer": "We have experience working with virtually any type of data source. This includes structured data from relational databases, ERP and CRM systems, spreadsheets, and flat files; semi-structured data like JSON, XML, and IoT device data; and unstructured data such as text, images, videos, and social media content. Our data integration capabilities allow us to connect to cloud services, on-premises systems, and third-party APIs to create a comprehensive data ecosystem for analysis."
+          },
+          {
+            "question": "Do we need to have clean, organized data before starting an analytics project?",
+            "answer": "No, data preparation is a core component of our analytics services. While having organized data can accelerate the process, we understand that real-world data is often messy and distributed across multiple systems. Our data engineering team will handle data cleaning, transformation, and integration as part of the project. We'll work with your data in its current state, implementing processes to improve data quality while simultaneously developing analytics solutions."
+          }
+        ],
+        "processSteps": [
+          {
+            "title": "Discovery & Requirements",
+            "description": "We work with your team to understand your business objectives and data landscape.",
+            "details": [
+              "Business goal definition",
+              "Data source identification",
+              "Key stakeholder interviews",
+              "Use case prioritization"
+            ]
+          },
+          {
+            "title": "Data Assessment & Preparation",
+            "description": "We evaluate your data quality and prepare it for analysis.",
+            "details": [
+              "Data quality assessment",
+              "Cleansing and transformation",
+              "Data integration from multiple sources",
+              "Feature engineering"
+            ]
+          },
+          {
+            "title": "Analysis & Model Development",
+            "description": "We apply statistical methods and build models tailored to your needs.",
+            "details": [
+              "Exploratory data analysis",
+              "Statistical modeling",
+              "Algorithm selection and tuning",
+              "Model validation"
+            ]
+          },
+          {
+            "title": "Visualization & Dashboard Creation",
+            "description": "We create intuitive visualizations to communicate insights effectively.",
+            "details": [
+              "Dashboard design",
+              "Interactive visualization development",
+              "KPI configuration",
+              "User experience optimization"
+            ]
+          },
+          {
+            "title": "Implementation & Knowledge Transfer",
+            "description": "We deploy solutions and ensure your team can leverage them effectively.",
+            "details": [
+              "Solution deployment",
+              "User training and documentation",
+              "Process integration",
+              "Ongoing support options"
+            ]
+          }
+        ],
+        "relevantIndustries": [
+          "retail",
+          "manufacturing",
+          "healthcare",
+          "finance",
+          "logistics",
+          "energy",
+          "telecommunications"
+        ],
+        "benefits": [
+          "Data-driven decision making across all organizational levels",
+          "Identification of new revenue streams and market opportunities",
+          "Improved operational efficiency and reduced costs",
+          "Enhanced customer experience through deeper insights",
+          "Competitive advantage through predictive capabilities",
+          "Risk mitigation through early pattern detection",
+          "Optimized resource allocation and planning"
+        ],
+        "additionalContent": {
+          "overview": "In today's data-rich environment, the ability to derive meaningful insights from information is a critical competitive advantage. Our Advanced Data Analytics services transform raw data into strategic assets that drive informed decision-making and business growth.",
+          "analyticsTypes": "We offer a comprehensive range of analytics capabilities, from descriptive analytics that explain what has happened, to diagnostic analytics that reveal why it happened, to predictive analytics that forecast what might happen, and ultimately to prescriptive analytics that recommend actions to optimize outcomes.",
+          "industryApplications": "Each industry has unique analytics needs and opportunities. In retail, we focus on customer segmentation and market basket analysis. For manufacturing, our emphasis is on production optimization and predictive maintenance. Healthcare solutions center on patient outcomes and operational efficiency. Financial services benefit from risk modeling and fraud detection analytics."
+        }
+      },
+      "machine-learning": {
+        "testimonials": [
+          {
+            "name": "Rajiv Kumar",
+            "role": "VP of Innovation",
+            "company": "TechSolutions Global",
+            "content": "Atorix IT developed a custom machine learning model that has revolutionized our product recommendation engine. Customer engagement is up by 42%, and our conversion rates have improved significantly.",
+            "rating": 5
+          },
+          {
+            "name": "Sarah Johnson",
+            "role": "Head of Digital Transformation",
+            "company": "MediLife Healthcare",
+            "content": "The predictive maintenance solution built by Atorix has transformed our equipment management processes. The ML model accurately predicts failures before they occur, saving us millions in potential downtime.",
+            "rating": 5
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Do we need massive amounts of data to implement machine learning solutions?",
+            "answer": "While having more high-quality data generally improves machine learning model performance, you don't necessarily need massive datasets to get started and see value. The required data volume depends on the complexity of the problem, the type of algorithm used, and the number of features or variables being considered. For many business applications, we can build effective models with moderately sized datasets, especially when domain expertise is incorporated into the solution design. We also employ techniques like transfer learning and data augmentation to maximize the utility of smaller datasets."
+          },
+          {
+            "question": "How do you ensure machine learning models remain accurate over time?",
+            "answer": "Model maintenance is a critical aspect of our machine learning services. We implement robust monitoring systems that track model performance and detect concept drift (when the statistical properties of the target variable change over time). Our MLOps approach includes automated retraining schedules, performance alerts, and version control for models. We also establish clear governance processes for model updates and validation. Depending on your needs, we can provide ongoing support services or train your team to maintain the models internally."
+          },
+          {
+            "question": "What types of business problems can machine learning solve?",
+            "answer": "Machine learning can address a wide range of business challenges across departments. Common applications include: customer segmentation and personalization; demand forecasting and inventory optimization; predictive maintenance and equipment failure prediction; fraud detection and risk assessment; document processing and information extraction; sentiment analysis and customer feedback interpretation; process automation and optimization; quality control and defect detection; and recommendation systems for products or content. Our approach begins with your business problem, not with the technology, to ensure we're applying ML where it delivers genuine value."
+          }
+        ],
+        "processSteps": [
+          {
+            "title": "Problem Definition & Data Strategy",
+            "description": "We define the specific problem and determine the data needed for the solution.",
+            "details": [
+              "Business objective clarification",
+              "Success criteria definition",
+              "Data requirements analysis",
+              "Feature identification"
+            ]
+          },
+          {
+            "title": "Data Collection & Preparation",
+            "description": "We gather and process data to create a suitable training dataset.",
+            "details": [
+              "Data acquisition",
+              "Cleaning and normalization",
+              "Feature engineering",
+              "Data splitting for training/testing"
+            ]
+          },
+          {
+            "title": "Model Development & Training",
+            "description": "We develop and train machine learning models tailored to your objectives.",
+            "details": [
+              "Algorithm selection",
+              "Model architecture design",
+              "Hyperparameter tuning",
+              "Cross-validation"
+            ]
+          },
+          {
+            "title": "Validation & Refinement",
+            "description": "We thoroughly test and optimize the model to ensure accuracy and performance.",
+            "details": [
+              "Performance evaluation",
+              "Error analysis",
+              "Model enhancement",
+              "Bias and fairness assessment"
+            ]
+          },
+          {
+            "title": "Deployment & Integration",
+            "description": "We deploy the model into your business environment and integrate it with existing systems.",
+            "details": [
+              "Production deployment",
+              "API development",
+              "System integration",
+              "Performance monitoring setup"
+            ]
+          },
+          {
+            "title": "Monitoring & Maintenance",
+            "description": "We ensure your model continues to perform optimally over time.",
+            "details": [
+              "Ongoing performance tracking",
+              "Drift detection",
+              "Regular retraining",
+              "Continuous improvement"
+            ]
+          }
+        ],
+        "relevantIndustries": [
+          "retail",
+          "manufacturing",
+          "healthcare",
+          "finance",
+          "transportation",
+          "energy",
+          "telecommunications",
+          "e-commerce"
+        ],
+        "benefits": [
+          "Automation of complex analytical tasks and processes",
+          "Enhanced accuracy in predictions and forecasting",
+          "Personalized customer experiences at scale",
+          "Proactive issue identification and resolution",
+          "Efficient resource allocation based on predicted needs",
+          "Discovery of hidden patterns in complex datasets",
+          "Reduced operational costs through optimization",
+          "Improved decision-making with predictive insights"
+        ],
+        "additionalContent": {
+          "overview": "Machine Learning (ML) represents a paradigm shift in how businesses leverage data, moving from reactive analysis to proactive prediction and prescription. Our ML solutions help organizations harness this transformative technology to automate decisions, uncover insights, and create intelligent systems that improve over time.",
+          "mlTypes": "We develop solutions across the machine learning spectrum, including supervised learning (classification and regression models), unsupervised learning (clustering and association), and reinforcement learning for complex decision-making scenarios. Our expertise extends to deep learning with neural networks for image, text, and sequence analysis.",
+          "implementation": "Our implementation approach emphasizes practical business value while managing the technical complexity of ML solutions. We follow MLOps best practices to ensure models are not just accurate but also sustainable, interpretable, ethical, and aligned with business objectives."
+        }
+      },
+      "data-engineering": {
+        "testimonials": [
+          {
+            "name": "Anand Patel",
+            "role": "CTO",
+            "company": "Digital Logistics Inc.",
+            "content": "Atorix IT completely transformed our data infrastructure. Their data engineering team designed a scalable architecture that unified our disparate systems and enabled real-time analytics across our entire supply chain.",
+            "rating": 5
+          },
+          {
+            "name": "Meera Shah",
+            "role": "VP of Data Strategy",
+            "company": "FinServe Solutions",
+            "content": "The data pipeline Atorix built for us has been a game-changer. We've reduced data processing time from days to minutes, and our analytics team finally has reliable, clean data to work with.",
+            "rating": 5
+          }
+        ],
+        "faqs": [
+          {
+            "question": "How do you handle data governance and security in your data engineering solutions?",
+            "answer": "Data governance and security are foundational elements of our data engineering practice. We implement comprehensive frameworks that address data classification, access controls, encryption, audit logging, and compliance requirements. Our architecture incorporates security at every layer, including network, storage, and application security. We design data lineage tracking to ensure transparency in how data flows and transforms throughout your systems. For compliance with regulations like GDPR, HIPAA, or industry-specific requirements, we build privacy controls directly into the data architecture. Our approach balances security with accessibility, ensuring protected data while enabling authorized users to derive value."
+          },
+          {
+            "question": "What technologies do you use for data engineering projects?",
+            "answer": "We select technologies based on your specific requirements, existing infrastructure, and long-term objectives rather than advocating for a one-size-fits-all approach. For data storage, we work with traditional relational databases (SQL Server, PostgreSQL, MySQL), NoSQL solutions (MongoDB, Cassandra), and data warehouses (Snowflake, Amazon Redshift, Google BigQuery). Our data processing implementations include batch processing frameworks (Apache Spark, Apache Hadoop) and stream processing tools (Apache Kafka, Apache Flink). For orchestration, we leverage platforms like Apache Airflow, Prefect, or cloud-native services. We're experienced with all major cloud providers (AWS, Azure, GCP) and can design hybrid architectures when needed."
+          },
+          {
+            "question": "Can you scale our existing data infrastructure without disrupting operations?",
+            "answer": "Yes, we specialize in designing and implementing scalable data architectures with minimal operational disruption. Our approach typically involves creating a parallel modernized infrastructure while maintaining the existing systems, followed by a gradual, phased migration. We employ techniques like change data capture (CDC) to synchronize data between old and new systems during transition. For cloud migrations, we utilize hybrid architectures during the transition period. We develop comprehensive testing protocols to validate data integrity and functionality before cutover. Our team works closely with your operations staff to plan maintenance windows strategically and implement fallback procedures. This methodology ensures business continuity while progressively improving your data capabilities."
+          }
+        ],
+        "processSteps": [
+          {
+            "title": "Requirements & Architecture Planning",
+            "description": "We analyze your data needs and design an optimal architecture.",
+            "details": [
+              "Business requirements gathering",
+              "Current state assessment",
+              "Data source mapping",
+              "Architecture blueprint development"
+            ]
+          },
+          {
+            "title": "Data Infrastructure Setup",
+            "description": "We build or enhance your data storage and processing environment.",
+            "details": [
+              "Storage solution implementation",
+              "Processing framework configuration",
+              "Security and access control setup",
+              "Environment scaling and optimization"
+            ]
+          },
+          {
+            "title": "Pipeline Development",
+            "description": "We create automated data flows to collect, transform, and deliver data.",
+            "details": [
+              "ETL/ELT process development",
+              "Batch and streaming pipeline creation",
+              "Data quality checks implementation",
+              "Error handling and monitoring setup"
+            ]
+          },
+          {
+            "title": "Integration & Connectivity",
+            "description": "We connect your data ecosystem and ensure smooth information flow.",
+            "details": [
+              "API development and integration",
+              "Connector implementation",
+              "Metadata management",
+              "Data catalog creation"
+            ]
+          },
+          {
+            "title": "Testing & Optimization",
+            "description": "We verify system performance and optimize for efficiency and reliability.",
+            "details": [
+              "Functional testing",
+              "Performance testing",
+              "Scalability validation",
+              "Query and processing optimization"
+            ]
+          },
+          {
+            "title": "Documentation & Training",
+            "description": "We ensure your team can effectively maintain and leverage the new data infrastructure.",
+            "details": [
+              "System documentation",
+              "Process workflow documentation",
+              "Knowledge transfer sessions",
+              "Operational support guidance"
+            ]
+          }
+        ],
+        "relevantIndustries": [
+          "finance",
+          "healthcare",
+          "retail",
+          "manufacturing",
+          "logistics",
+          "telecommunications",
+          "energy",
+          "e-commerce"
+        ],
+        "benefits": [
+          "Unified, consistent data across the organization",
+          "Accelerated data processing and reduced latency",
+          "Enhanced data quality and reliability",
+          "Scalable infrastructure that grows with your needs",
+          "Improved data accessibility for business users",
+          "Reduced operational costs through automation",
+          "Future-proof architecture supporting analytics evolution",
+          "Comprehensive data governance and security"
+        ],
+        "additionalContent": {
+          "overview": "Data Engineering is the foundation that enables all advanced analytics, machine learning, and data science initiatives. Our Data Engineering services create robust, scalable data infrastructure that transforms raw, disparate data into consistent, reliable, and accessible information assets ready for analysis and utilization.",
+          "capabilitiesOverview": "We provide end-to-end data engineering solutions spanning data integration, transformation, storage, processing, and delivery. Our expertise covers batch and real-time processing, data warehousing, data lakes, and hybrid architectures tailored to your specific business needs and existing technology landscape.",
+          "modernization": "For organizations with legacy data systems, we offer modernization pathways that incrementally transform outdated infrastructure into modern, cloud-based architectures without disrupting critical business operations. This approach reduces risk while enabling you to quickly begin leveraging advanced data capabilities."
+        }
+      },
+      "data-visualization": {
+        "testimonials": [
+          {
+            "name": "Ravi Desai",
+            "role": "CFO",
+            "company": "Pioneer Industries",
+            "content": "Atorix IT's data visualization dashboards have transformed how our executive team monitors performance. Complex financial data is now presented in intuitive visuals that enable quick decision-making.",
+            "rating": 5
+          },
+          {
+            "name": "Anjali Sharma",
+            "role": "Marketing Director",
+            "company": "Global Consumer Brands",
+            "content": "The marketing analytics dashboard created by Atorix provides us with real-time campaign insights that have significantly improved our marketing ROI. Their team truly understood our needs and delivered beyond expectations.",
+            "rating": 5
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Which visualization tools and technologies do you work with?",
+            "answer": "We have expertise across a wide range of data visualization tools and platforms to best match your specific needs and environment. Our team is proficient with industry-leading BI platforms including Tableau, Power BI, Qlik, and Looker. For embedded analytics, we work with libraries like D3.js, Chart.js, and Highcharts. We also develop custom visualizations using React, Angular, or Vue.js frameworks when standard solutions don't meet specific requirements. For real-time dashboards, we implement solutions using tools like Grafana or build custom applications with WebSocket capabilities. Our tool selection is guided by your existing technology ecosystem, user technical proficiency, specific visualization requirements, and budget considerations."
+          },
+          {
+            "question": "How do you ensure dashboards are user-friendly and drive adoption?",
+            "answer": "User adoption is central to our visualization design process. We begin with stakeholder interviews to understand different user personas, their technical comfort levels, and how they'll use the dashboard in their workflow. Our iterative design process incorporates regular user feedback through wireframes, prototypes, and usability testing. We apply data visualization best practices, emphasizing clarity, appropriate chart selection, and intuitive interactions. We design for progressive disclosure, where users can easily access high-level insights and drill down for details as needed. After implementation, we provide comprehensive training, create user guides, and gather usage analytics to identify improvement opportunities. This human-centered approach ensures dashboards are not just visually appealing but truly valuable tools that integrate seamlessly into users' daily work."
+          },
+          {
+            "question": "Can you create interactive dashboards that allow users to explore data themselves?",
+            "answer": "Yes, interactivity is a core strength of our data visualization solutions. We design dashboards with various levels of interactive features based on user needs and technical capabilities. These include filtering and parameter controls that allow users to focus on specific data segments; drill-down and drill-through capabilities to explore hierarchical data; cross-filtering where selections in one visualization affect others; interactive tooltips that reveal additional context; and customizable views that users can save for future reference. For advanced users, we can implement self-service analytics capabilities that enable data exploration beyond predefined views. All interactive elements are designed with intuitive user experience principles to ensure users can easily navigate and derive insights without extensive training."
+          }
+        ],
+        "processSteps": [
+          {
+            "title": "Discovery & Requirements",
+            "description": "We understand your business objectives and identify key visualization needs.",
+            "details": [
+              "Stakeholder interviews",
+              "User persona development",
+              "KPI and metric definition",
+              "Use case prioritization"
+            ]
+          },
+          {
+            "title": "Data Analysis & Preparation",
+            "description": "We analyze available data and prepare it for visualization.",
+            "details": [
+              "Data source assessment",
+              "Data quality validation",
+              "Calculation and metric creation",
+              "Data model development"
+            ]
+          },
+          {
+            "title": "Design & Prototyping",
+            "description": "We create visual concepts and interactive prototypes for feedback.",
+            "details": [
+              "Visual concept development",
+              "Dashboard wireframing",
+              "User interface design",
+              "Interactive prototype creation"
+            ]
+          },
+          {
+            "title": "Dashboard Development",
+            "description": "We build full-featured dashboards with interactive capabilities.",
+            "details": [
+              "Visual implementation",
+              "Interactivity development",
+              "Performance optimization",
+              "Mobile responsiveness"
+            ]
+          },
+          {
+            "title": "Testing & Refinement",
+            "description": "We validate dashboard functionality and refine based on user feedback.",
+            "details": [
+              "Functional testing",
+              "Usability testing",
+              "Performance testing",
+              "Design refinement"
+            ]
+          },
+          {
+            "title": "Deployment & Training",
+            "description": "We deploy the solution and ensure users can effectively leverage it.",
+            "details": [
+              "Production deployment",
+              "User training sessions",
+              "Documentation creation",
+              "Adoption support"
+            ]
+          }
+        ],
+        "relevantIndustries": [
+          "finance",
+          "healthcare",
+          "retail",
+          "manufacturing",
+          "logistics",
+          "marketing",
+          "sales",
+          "operations"
+        ],
+        "benefits": [
+          "Faster data comprehension and reduced decision time",
+          "Enhanced data storytelling and communication",
+          "Improved data accessibility for non-technical users",
+          "Real-time monitoring of critical business metrics",
+          "Increased data transparency across the organization",
+          "Pattern and trend identification through visual analysis",
+          "More effective performance tracking and management",
+          "Consolidated view of disparate data sources"
+        ],
+        "additionalContent": {
+          "overview": "Data Visualization transforms complex information into intuitive visual formats that enable faster understanding and better decision-making. Our visualization services bridge the gap between raw data and business action by creating engaging, interactive dashboards and reports that make insights accessible to all stakeholders.",
+          "designPhilosophy": "Our approach to visualization design balances aesthetic appeal with functional clarity. We apply perceptual principles and cognitive science to create visualizations that effectively communicate information while minimizing cognitive load. Every design choice—from color selection to chart type—is purposeful and aligned with the data story being told.",
+          "userCentricApproach": "We recognize that different stakeholders have different information needs and technical abilities. Our dashboards are designed with these diverse users in mind, providing appropriate levels of detail, interactivity, and complexity based on specific user personas. This ensures that everyone from executives to analysts can derive value from the visualization."
+        }
+      },
+      "real-time-analytics": {
+        "testimonials": [
+          {
+            "name": "Sanjeev Mehta",
+            "role": "Operations Director",
+            "company": "NextGen Logistics",
+            "content": "The real-time analytics platform that Atorix IT implemented has transformed our supply chain operations. We now have immediate visibility into shipment delays and can proactively address issues before they impact customers.",
+            "rating": 5
+          },
+          {
+            "name": "Neha Verma",
+            "role": "Head of Customer Experience",
+            "company": "Digital Solutions Inc",
+            "content": "Atorix's real-time customer analytics solution gives us immediate insights into user behavior on our platform. This has enabled us to address issues instantly and personalize experiences on the fly, resulting in a 25% improvement in customer satisfaction scores.",
+            "rating": 5
+          }
+        ],
+        "faqs": [
+          {
+            "question": "What kind of data sources can you integrate into real-time analytics systems?",
+            "answer": "Our real-time analytics solutions can integrate data from virtually any source that generates continuous data streams. This includes IoT devices and sensors; web and mobile application interactions; transaction systems and point-of-sale terminals; social media feeds and messaging platforms; financial market data feeds; equipment telemetry and industrial systems; cybersecurity and network monitoring tools; and location and GPS data. We implement appropriate connectors and protocols based on the specific data source, including MQTT, Kafka, WebSockets, APIs, change data capture (CDC), and log file monitoring. Our architecture can handle both structured and unstructured data formats and accommodate varying volumes and velocities."
+          },
+          {
+            "question": "How do you ensure reliability and fault tolerance in real-time systems?",
+            "answer": "Reliability is paramount in real-time analytics systems where data loss can mean missed opportunities or critical alerts. Our approach includes redundant processing nodes to eliminate single points of failure; distributed storage with appropriate replication factors; message persistence and guaranteed delivery mechanisms; automated failover capabilities; buffering and backpressure handling to manage load spikes; comprehensive monitoring and alerting for system health; and error handling with dead-letter queues for message recovery. We design systems with the principle of graceful degradation, ensuring that even if some components fail, the overall system continues to function, potentially with reduced capacity but without total outage. Our architectures also include disaster recovery planning with defined recovery point objectives (RPO) and recovery time objectives (RTO)."
+          },
+          {
+            "question": "What's the difference between batch and real-time analytics, and when should we use each?",
+            "answer": "Batch analytics processes data in scheduled intervals or defined chunks, while real-time analytics processes data as it's generated, typically within seconds or milliseconds. The choice between them depends on your business needs and use cases. Real-time analytics is ideal when immediate action is required, such as fraud detection, equipment failure alerts, or dynamic pricing adjustments. It's also valuable for applications requiring fresh data, like live dashboards or personalized customer experiences. Batch processing remains appropriate for historical analysis, complex calculations that don't require immediate results, regular reporting, and data preparation for machine learning. Many organizations benefit from a hybrid approach, using real-time analytics for time-sensitive operations while leveraging batch processing for deeper analysis and historical context. We can help design an architecture that combines both approaches to meet your specific requirements."
+          }
+        ],
+        "processSteps": [
+          {
+            "title": "Requirements & Use Case Definition",
+            "description": "We identify specific real-time analytics needs and success criteria.",
+            "details": [
+              "Business objective clarification",
+              "Latency requirements definition",
+              "Key metrics identification",
+              "Alert and action triggers specification"
+            ]
+          },
+          {
+            "title": "Data Source Assessment",
+            "description": "We evaluate available data streams and integration requirements.",
+            "details": [
+              "Data source inventory",
+              "Data quality and format analysis",
+              "Volume and velocity estimation",
+              "Connection method determination"
+            ]
+          },
+          {
+            "title": "Architecture Design",
+            "description": "We design a scalable, fault-tolerant real-time analytics architecture.",
+            "details": [
+              "Stream processing framework selection",
+              "Storage solution design",
+              "Scalability planning",
+              "Failover and recovery design"
+            ]
+          },
+          {
+            "title": "Pipeline Implementation",
+            "description": "We build data pipelines that process information in real-time.",
+            "details": [
+              "Data ingestion implementation",
+              "Stream processing logic development",
+              "State management setup",
+              "Output connector configuration"
+            ]
+          },
+          {
+            "title": "Analytics & Visualization",
+            "description": "We develop real-time analytics capabilities and visualizations.",
+            "details": [
+              "Real-time calculation implementation",
+              "Dashboard development",
+              "Alert system configuration",
+              "API endpoint creation"
+            ]
+          },
+          {
+            "title": "Testing & Optimization",
+            "description": "We validate system performance under realistic conditions.",
+            "details": [
+              "Throughput testing",
+              "Latency measurement",
+              "Failure scenario testing",
+              "Performance tuning"
+            ]
+          },
+          {
+            "title": "Deployment & Monitoring",
+            "description": "We deploy the system and establish comprehensive monitoring.",
+            "details": [
+              "Production deployment",
+              "Monitoring setup",
+              "Alerting configuration",
+              "Operational documentation"
+            ]
+          }
+        ],
+        "relevantIndustries": [
+          "finance",
+          "retail",
+          "manufacturing",
+          "telecommunications",
+          "healthcare",
+          "logistics",
+          "energy",
+          "e-commerce"
+        ],
+        "benefits": [
+          "Immediate response to critical business events",
+          "Reduced decision latency and faster issue resolution",
+          "Enhanced customer experience through real-time personalization",
+          "Early detection of anomalies and potential problems",
+          "Improved operational efficiency with immediate feedback",
+          "Competitive advantage through faster market response",
+          "Optimized resource allocation based on current conditions",
+          "Continuous monitoring of KPIs with instant alerting"
+        ],
+        "additionalContent": {
+          "overview": "Real-Time Analytics enables organizations to process and analyze data as it's generated, delivering immediate insights that drive instant action. Our solutions transform how businesses respond to events, monitor operations, and interact with customers by providing up-to-the-second intelligence rather than relying on historical analysis.",
+          "streamProcessing": "At the core of our real-time analytics solutions is stream processing technology that continuously analyzes data flows, detecting patterns, calculating metrics, and triggering actions without storing data first. This approach dramatically reduces the time between data generation and business response, enabling truly real-time operations.",
+          "useCase": "Real-time analytics applications span industries and departments: financial services use it for fraud detection and trading; manufacturing for equipment monitoring and quality control; retail for inventory management and personalized offers; telecommunications for network monitoring and customer experience; and operations for resource allocation and process optimization."
+        }
+      }
+    },
     "consulting": {
       "business-consulting": {
         "testimonials": [

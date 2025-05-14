@@ -280,6 +280,89 @@
       ]
     },
     {
+      "id": "data-science",
+      "name": "Data Science Services",
+      "description": "Transform your business data into actionable insights with our comprehensive data science solutions.",
+      "icon": "/images/icons/data-science.svg",
+      "services": [
+        {
+          "id": "data-analytics",
+          "name": "Advanced Data Analytics",
+          "description": "Unlock the full potential of your data with our advanced analytics services. We help you extract meaningful insights to drive strategic decision-making and business growth.",
+          "details": "Our advanced data analytics services combine statistical analysis, data mining, and predictive modeling to transform your raw data into actionable business insights. We work with structured and unstructured data from multiple sources to reveal patterns, trends, and correlations that drive informed decision-making.",
+          "features": [
+            "Comprehensive data analysis and interpretation",
+            "Predictive analytics and forecasting",
+            "Business intelligence reporting",
+            "Custom KPI development and tracking",
+            "Statistical modeling and hypothesis testing",
+            "Anomaly detection and pattern recognition"
+          ],
+          "image": "/images/services/data-science/data-analytics-flow.jpg"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine Learning Solutions",
+          "description": "Leverage the power of machine learning to automate processes, identify patterns, and make predictions that drive efficiency and innovation across your organization.",
+          "details": "Our machine learning services help businesses implement AI-driven solutions that learn from your data and improve over time. We design, develop, and deploy custom machine learning models tailored to your specific business challenges, whether you need customer segmentation, demand forecasting, or recommendation systems.",
+          "features": [
+            "Custom ML model development and deployment",
+            "Supervised and unsupervised learning algorithms",
+            "Deep learning and neural networks",
+            "Natural Language Processing (NLP)",
+            "Computer vision and image recognition",
+            "Model training, validation, and optimization"
+          ],
+          "image": "/images/services/data-science/ai-ml-concept.jpg"
+        },
+        {
+          "id": "data-engineering",
+          "name": "Data Engineering & Architecture",
+          "description": "Build robust data pipelines and infrastructure to support your analytics initiatives with our comprehensive data engineering services.",
+          "details": "Our data engineering team designs and implements the foundational data architecture needed to support advanced analytics and machine learning. We create scalable, efficient data pipelines that transform raw data into analytics-ready formats, ensuring data quality, accessibility, and security throughout the process.",
+          "features": [
+            "Data pipeline design and implementation",
+            "ETL/ELT process development",
+            "Data warehouse and lake architecture",
+            "Database optimization and management",
+            "Big data infrastructure setup",
+            "Data integration and API development"
+          ],
+          "image": "/images/services/data-science/streaming-data.jpg"
+        },
+        {
+          "id": "data-visualization",
+          "name": "Data Visualization & Dashboarding",
+          "description": "Transform complex data into intuitive visual stories with our data visualization and dashboard development services.",
+          "details": "Our data visualization experts create compelling, interactive dashboards and reports that make complex data easily understandable. We work with leading visualization tools to build customized solutions that enable stakeholders at all levels to monitor KPIs, discover trends, and make data-driven decisions through intuitive visual interfaces.",
+          "features": [
+            "Interactive dashboard development",
+            "Custom visualization design",
+            "Real-time data monitoring",
+            "Executive reporting systems",
+            "Performance scorecard creation",
+            "Data storytelling and presentation"
+          ],
+          "image": "/images/services/data-science/data-visualization.jpg"
+        },
+        {
+          "id": "real-time-analytics",
+          "name": "Real-Time Analytics",
+          "description": "Gain immediate insights from your streaming data with our real-time analytics solutions that enable instant decision-making and rapid response to emerging trends.",
+          "details": "Our real-time analytics services help organizations process and analyze data as it's generated, enabling immediate action and response. We implement stream processing architectures that transform, analyze, and visualize data in motion, providing timely insights for operations that require instant decision-making capabilities.",
+          "features": [
+            "Stream processing implementation",
+            "Real-time data pipeline development",
+            "Event-driven architecture design",
+            "Live monitoring and alerting systems",
+            "Low-latency analytics solutions",
+            "IoT data processing and analysis"
+          ],
+          "image": "/images/services/data-science/streaming-data.jpg"
+        }
+      ]
+    },
+    {
       "id": "microsoft-dynamics",
       "name": "Microsoft Dynamics",
       "description": "Microsoft Dynamics 365 implementation and support services for cloud-based business applications.",

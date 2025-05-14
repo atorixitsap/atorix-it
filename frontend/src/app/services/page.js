@@ -8,6 +8,7 @@ import HeroSection from "@/components/services/HeroSection";
 import CategoriesOverview from "@/components/services/CategoriesOverview";
 import ServiceCategorySection from "@/components/services/ServiceCategorySection";
 import ServiceCtaSection from "@/components/services/ServiceCtaSection";
+import DataScienceShowcase from "@/components/services/DataScienceShowcase";
 
 export default function ServicesPage() {
   const { scrollYProgress } = useScroll();
@@ -30,6 +31,9 @@ export default function ServicesPage() {
 
       {/* Categories Overview */}
       <CategoriesOverview />
+
+      {/* Data Science Showcase - Special Feature Section */}
+      <DataScienceShowcase />
 
       {/* Detailed Category Sections */}
       <div className="bg-muted/20">

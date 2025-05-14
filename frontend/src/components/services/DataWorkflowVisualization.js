@@ -140,11 +140,12 @@ export default function DataWorkflowVisualization() {
                     }`}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <step.icon
-                      className={`h-6 w-6 ${
+                    {/* Dynamically rendered icon */}
+                    {React.createElement(step.icon, {
+                      className: `h-6 w-6 ${
                         activeStep === index ? step.color : "text-muted-foreground"
-                      }`}
-                    />
+                      }`,
+                    })}
                   </motion.div>
 
                   <p
@@ -184,7 +185,10 @@ export default function DataWorkflowVisualization() {
 
             <div className="flex items-start md:items-center gap-6 md:gap-10 flex-col md:flex-row">
               <div className={`rounded-full p-5 ${steps[activeStep].bgColor} border ${steps[activeStep].borderColor}`}>
-                <steps[activeStep].icon className={`h-10 w-10 ${steps[activeStep].color}`} />
+                {/* Dynamically rendered icon for step details */}
+                {React.createElement(steps[activeStep].icon, {
+                  className: `h-10 w-10 ${steps[activeStep].color}`,
+                })}
               </div>
 
               <div className="flex-1">
